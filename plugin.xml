@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="org.apache.cordova.device" version="0.2.3">
+
+    <name>iBeacon</name>
+    <description>Cross-plattform iBeacon plugin for Cordova/Phonegap</description>
+    <license>MIT</license>
+    <keywords>cordova,ibeacon,bluetooth,ble</keywords>
+    <repo>https://github.com/schickling/cordova-ibeacon-plugin</repo>
+
+    <engines>
+        <engine name="cordova" version=">=3.1.0" />
+    </engines>
+
+    <js-module src="www/ibeacon.js" name="ibeacon">
+        <clobbers target="ibeacon" />
+    </js-module>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="IBeacon">
+                <param name="ios-package" value="CDVIBeacon"/>
+            </feature>
+        </config-file>
+        <framework src="CoreBluetooth.framework" />
+        <header-file src="src/ios/IBeacon.h" />
+        <source-file src="src/ios/IBeacon.m" />
+    </platform>
+
+</plugin>
