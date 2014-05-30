@@ -1,0 +1,29 @@
+{
+  "name": "cordova-ibeacon-plugin",
+  "version": "0.0.0",
+  "description": "Cross-plattform iBeacon plugin for Cordova/Phonegap",
+  "main": "ibeacon.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schickling/cordova-ibeacon-plugin.git"
+  },
+  "keywords": [
+    "ibeacon",
+    "cordova",
+    "phonegap",
+    "bluetooth",
+    "ble"
+  ],
+  "author": "Johannes Schickling <schickling.j@gmail.com> (https://github.com/schickling)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/schickling/cordova-ibeacon-plugin/issues"
+  },
+  "homepage": "https://github.com/schickling/cordova-ibeacon-plugin"
+}
