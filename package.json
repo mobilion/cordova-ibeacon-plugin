@@ -2,7 +2,7 @@
   "name": "cordova-ibeacon-plugin",
   "version": "0.0.0",
   "description": "Cross-plattform iBeacon plugin for Cordova/Phonegap",
-  "main": "ibeacon.js",
+  "main": "www/ibeacon.js",
   "directories": {
     "test": "tests"
   },
