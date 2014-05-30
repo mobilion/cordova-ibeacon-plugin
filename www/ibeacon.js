@@ -1,7 +1,7 @@
-function Region(region) {
-  this.uuid = region.uuid;
-  this.major = region.major;
-  this.minor = region.minor;
-}
+var Region = require('./region');
 
-module.exports = new Region();
+var iBeacon = {
+  Region: Region
+};
+
+module.exports = iBeacon;

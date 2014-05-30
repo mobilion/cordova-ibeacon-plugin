@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="org.apache.cordova.ibeacon" version="0.2.3">
+        id="org.apache.cordova.ibeacon" version="0.0.0">
 
     <name>iBeacon</name>
     <description>Cross-plattform iBeacon plugin for Cordova/Phonegap</description>
@@ -13,7 +13,9 @@
     </engines>
 
     <js-module src="www/ibeacon.js" name="ibeacon">
-        <clobbers target="ibeacon" />
+        <clobbers target="iBeacon" />
+    </js-module>
+    <js-module src="www/region.js" name="region">
     </js-module>
 
     <platform name="ios">
