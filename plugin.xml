@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="org.apache.cordova.device" version="0.2.3">
+        id="org.apache.cordova.ibeacon" version="0.2.3">
 
     <name>iBeacon</name>
     <description>Cross-plattform iBeacon plugin for Cordova/Phonegap</description>
@@ -19,7 +19,7 @@
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
             <feature name="IBeacon">
-                <param name="ios-package" value="CDVIBeacon"/>
+                <param name="ios-package" value="IBeacon"/>
             </feature>
         </config-file>
         <framework src="CoreBluetooth.framework" />
