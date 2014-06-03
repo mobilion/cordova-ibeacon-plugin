@@ -17,18 +17,73 @@ describe('ibeacon', function() {
   });
   var regions = [regionA, regionB];
 
+  describe('advertising', function() {
+
+    it('should start advertising without measured power', function() {
+
+      var onDidStartAdvertising = function() {};
+
+      ibeacon.startAdvertising(regionA, onDidStartAdvertising);
+
+      expect(execCache.length).toBe(1);
+      expect(execCache[0].actionName).toBe('startAdvertising');
+      expect(execCache[0].onSuccess).toBe(onDidStartAdvertising);
+
+    });
+
+    it('should start advertising with measured power', function() {
+
+      var onDidStartAdvertising = function() {};
+      var measuredPower = 3;
+
+      ibeacon.startAdvertising(regionA, onDidStartAdvertising, measuredPower);
+
+      expect(execCache.length).toBe(1);
+      expect(execCache[0].actionName).toBe('startAdvertising');
+      expect(execCache[0].onSuccess).toBe(onDidStartAdvertising);
+      expect(execCache[0].commandArguments[0]).toBe(regionA);
+      expect(execCache[0].commandArguments[1]).toBe(measuredPower);
+
+    });
+
+    it('should stop advertising', function() {
+
+      var onSuccess = function() {};
+
+      ibeacon.stopAdvertising(onSuccess);
+
+      expect(execCache.length).toBe(1);
+      expect(execCache[0].actionName).toBe('stopAdvertising');
+      expect(execCache[0].onSuccess).toBe(onSuccess);
+
+    });
+
+    it('should call isAdvertising', function() {
+
+      var onSuccess = function() {};
+
+      ibeacon.isAdvertising(onSuccess);
+
+      expect(execCache.length).toBe(1);
+      expect(execCache[0].actionName).toBe('isAdvertising');
+      expect(execCache[0].onSuccess).toBe(onSuccess);
+
+    });
+
+  });
+
   describe('ranging', function() {
 
     it('should start ranging beacons for single region', function() {
 
       var didRangeBeaconsCallback = function() {};
 
-      ibeacon.startRangingBeaconsInRegion(regions[0], didRangeBeaconsCallback);
+      ibeacon.startRangingBeaconsInRegion(regionA, didRangeBeaconsCallback);
 
       expect(execCache.length).toBe(1);
       expect(execCache[0].actionName).toBe('startRangingBeaconsInRegion');
       expect(execCache[0].onSuccess).toBe(didRangeBeaconsCallback);
-      expect(execCache[0].commandArguments[0]).toBe(regions[0]);
+      expect(execCache[0].commandArguments[0]).toBe(regionA);
 
     });
 
@@ -41,20 +96,20 @@ describe('ibeacon', function() {
       expect(execCache.length).toBe(2);
       expect(execCache[0].actionName).toBe('startRangingBeaconsInRegion');
       expect(execCache[0].onSuccess).toBe(didRangeBeaconsCallback);
-      expect(execCache[0].commandArguments[0]).toBe(regions[0]);
+      expect(execCache[0].commandArguments[0]).toBe(regionA);
       expect(execCache[1].actionName).toBe('startRangingBeaconsInRegion');
       expect(execCache[1].onSuccess).toBe(didRangeBeaconsCallback);
-      expect(execCache[1].commandArguments[0]).toBe(regions[1]);
+      expect(execCache[1].commandArguments[0]).toBe(regionB);
 
     });
 
     it('should stop ranging beacons for single region', function() {
 
-      ibeacon.stopRangingBeaconsInRegion(regions[0]);
+      ibeacon.stopRangingBeaconsInRegion(regionA);
 
       expect(execCache.length).toBe(1);
       expect(execCache[0].actionName).toBe('stopRangingBeaconsInRegion');
-      expect(execCache[0].commandArguments[0]).toBe(regions[0]);
+      expect(execCache[0].commandArguments[0]).toBe(regionA);
 
     });
 
@@ -64,9 +119,9 @@ describe('ibeacon', function() {
 
       expect(execCache.length).toBe(2);
       expect(execCache[0].actionName).toBe('stopRangingBeaconsInRegion');
-      expect(execCache[0].commandArguments[0]).toBe(regions[0]);
+      expect(execCache[0].commandArguments[0]).toBe(regionA);
       expect(execCache[1].actionName).toBe('stopRangingBeaconsInRegion');
-      expect(execCache[1].commandArguments[0]).toBe(regions[1]);
+      expect(execCache[1].commandArguments[0]).toBe(regionB);
 
     });
 
@@ -76,40 +131,40 @@ describe('ibeacon', function() {
 
     it('should start monitoring beacons for single region', function() {
 
-      var didRangeBeaconsCallback = function() {};
+      var didDetermineStateCallback = function() {};
 
-      ibeacon.startMonitoringForRegion(regions[0], didRangeBeaconsCallback);
+      ibeacon.startMonitoringForRegion(regionA, didDetermineStateCallback);
 
       expect(execCache.length).toBe(1);
       expect(execCache[0].actionName).toBe('startMonitoringForRegion');
-      expect(execCache[0].onSuccess).toBe(didRangeBeaconsCallback);
-      expect(execCache[0].commandArguments[0]).toBe(regions[0]);
+      expect(execCache[0].onSuccess).toBe(didDetermineStateCallback);
+      expect(execCache[0].commandArguments[0]).toBe(regionA);
 
     });
 
     it('should start monitoring beacons for multiple regions', function() {
 
-      var didRangeBeaconsCallback = function() {};
+      var didDetermineStateCallback = function() {};
 
-      ibeacon.startMonitoringForRegion(regions, didRangeBeaconsCallback);
+      ibeacon.startMonitoringForRegion(regions, didDetermineStateCallback);
 
       expect(execCache.length).toBe(2);
       expect(execCache[0].actionName).toBe('startMonitoringForRegion');
-      expect(execCache[0].onSuccess).toBe(didRangeBeaconsCallback);
-      expect(execCache[0].commandArguments[0]).toBe(regions[0]);
+      expect(execCache[0].onSuccess).toBe(didDetermineStateCallback);
+      expect(execCache[0].commandArguments[0]).toBe(regionA);
       expect(execCache[1].actionName).toBe('startMonitoringForRegion');
-      expect(execCache[1].onSuccess).toBe(didRangeBeaconsCallback);
-      expect(execCache[1].commandArguments[0]).toBe(regions[1]);
+      expect(execCache[1].onSuccess).toBe(didDetermineStateCallback);
+      expect(execCache[1].commandArguments[0]).toBe(regionB);
 
     });
 
     it('should stop monitoring beacons for single region', function() {
 
-      ibeacon.stopMonitoringForRegion(regions[0]);
+      ibeacon.stopMonitoringForRegion(regionA);
 
       expect(execCache.length).toBe(1);
       expect(execCache[0].actionName).toBe('stopMonitoringForRegion');
-      expect(execCache[0].commandArguments[0]).toBe(regions[0]);
+      expect(execCache[0].commandArguments[0]).toBe(regionA);
 
     });
 
@@ -119,9 +174,9 @@ describe('ibeacon', function() {
 
       expect(execCache.length).toBe(2);
       expect(execCache[0].actionName).toBe('stopMonitoringForRegion');
-      expect(execCache[0].commandArguments[0]).toBe(regions[0]);
+      expect(execCache[0].commandArguments[0]).toBe(regionA);
       expect(execCache[1].actionName).toBe('stopMonitoringForRegion');
-      expect(execCache[1].commandArguments[0]).toBe(regions[1]);
+      expect(execCache[1].commandArguments[0]).toBe(regionB);
 
     });
 

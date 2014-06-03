@@ -20,32 +20,26 @@ var callNative = function(actionName, region, onSuccess, onFailure, extraArgs) {
 
 };
 
-var iBeacon = {
+var ibeacon = {
 
   Region: Region,
 
-  startRangingBeaconsInRegion: function(regions, didRangeBeaconsCallback) {
+  startAdvertising: function(region, onDidStartAdvertising, measuredPower) {
 
-    if (!(regions instanceof Array)) {
-      regions = [regions];
-    }
-
-    for (var i = 0; i < regions.length; i++) {
-      callNative('startRangingBeaconsInRegion', regions[i], didRangeBeaconsCallback);
+    if (measuredPower) {
+      return callNative('startAdvertising', region, onDidStartAdvertising, null, [measuredPower]);
+    } else {
+      return callNative('startAdvertising', region, onDidStartAdvertising);
     }
 
   },
 
-  stopRangingBeaconsInRegion: function(regions) {
+  stopAdvertising: function(onSuccess) {
+    callNative('stopAdvertising', null, onSuccess);
+  },
 
-    if (!(regions instanceof Array)) {
-      regions = [regions];
-    }
-
-    for (var i = 0; i < regions.length; i++) {
-      callNative('stopRangingBeaconsInRegion', regions[i]);
-    }
-
+  isAdvertising: function(onSuccess) {
+    callNative('isAdvertising', null, onSuccess);
   },
 
   startMonitoringForRegion: function(regions, didDetermineStateCallback) {
@@ -72,24 +66,30 @@ var iBeacon = {
 
   },
 
-  isAdvertising: function(onSuccess) {
-    callNative('isAdvertising', null, onSuccess);
-  },
+  startRangingBeaconsInRegion: function(regions, didRangeBeaconsCallback) {
 
-  startAdvertising: function(region, onPeripheralManagerDidStartAdvertising, measuredPower) {
+    if (!(regions instanceof Array)) {
+      regions = [regions];
+    }
 
-    if (measuredPower) {
-      return callNative('startAdvertising', region, onPeripheralManagerDidStartAdvertising, null, [measuredPower]);
-    } else {
-      return callNative('startAdvertising', region, onPeripheralManagerDidStartAdvertising);
+    for (var i = 0; i < regions.length; i++) {
+      callNative('startRangingBeaconsInRegion', regions[i], didRangeBeaconsCallback);
     }
 
   },
 
-  stopAdvertising: function(onSuccess) {
-    callNative('stopAdvertising', null, onSuccess);
+  stopRangingBeaconsInRegion: function(regions) {
+
+    if (!(regions instanceof Array)) {
+      regions = [regions];
+    }
+
+    for (var i = 0; i < regions.length; i++) {
+      callNative('stopRangingBeaconsInRegion', regions[i]);
+    }
+
   },
 
 };
 
-module.exports = iBeacon;
+module.exports = ibeacon;
