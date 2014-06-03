@@ -1,7 +1,7 @@
 cordova-ibeacon-plugin [![Build Status](https://travis-ci.org/schickling/cordova-ibeacon-plugin.svg?branch=master)](https://travis-ci.org/schickling/cordova-ibeacon-plugin)
 ======================
 
-Cross-platform (iOS/Android) iBeacon plugin for [Cordova](http://cordova.apache.org/)/[Phonegap](http://phonegap.com/)
+Cross-platform (iOS/Android) iBeacon plugin for [Cordova](http://cordova.apache.org/) and [Phonegap](http://phonegap.com/)
 
 ## Install
 
