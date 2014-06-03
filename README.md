@@ -11,24 +11,24 @@ $ cordova plugin add https://github.com/schickling/cordova-ibeacon-plugin.git
 
 ## Usage
 
-### Advertising
+#### Advertising
 
-#### startAdvertising
+##### startAdvertising
 
-#### stopAdvertising
+##### stopAdvertising
 
-#### isAdvertising
+##### isAdvertising
 
-### Monitoring
+#### Monitoring
 
-#### startMonitoringForRegion
+##### startMonitoringForRegion
 
-#### stopMonitoringForRegion
+##### stopMonitoringForRegion
 
-### Ranging
+#### Ranging
 
-#### startRangingBeaconsInRegion
+##### startRangingBeaconsInRegion
 
-#### stopRangingBeaconsInRegion
+##### stopRangingBeaconsInRegion
 
 ## MIT License
