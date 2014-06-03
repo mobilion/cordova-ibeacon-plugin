@@ -29,6 +29,10 @@
   "devDependencies": {
     "gulp": "^3.7.0",
     "browserify": "^4.1.8",
-    "vinyl-source-stream": "^0.1.1"
+    "vinyl-source-stream": "^0.1.1",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "karma-jasmine": "^0.1.5",
+    "phantomjs": "^1.9.7-8",
+    "karma": "^0.12.16"
   }
 }
