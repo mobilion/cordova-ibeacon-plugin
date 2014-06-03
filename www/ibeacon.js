@@ -3,43 +3,15 @@
 var exec = require('cordova/exec');
 var Region = require('./region');
 
-var validateRegion = function(region) {
+var callNative = function(actionName, region, onSuccess, onFailure, extraArgs) {
 
-  if (!region instanceof Region) {
-    throw new TypeError('Parameter region has to be a Region object.');
+  var commandArguments = [];
+
+  if (region) {
+    region.validate();
+    commandArguments.push(region);
   }
 
-  region.validate();
-
-}
-
-var callNative = function(actionName, region, beaconCallback, errorCallback, extraArgs) {
-
-  validateRegion(region);
-
-  var validActions = ['startMonitoringForRegion', 'stopMonitoringForRegion', 'startRangingBeaconsInRegion', 'stopRangingBeaconsInRegion', 'startAdvertising'];
-
-  if (validActions.indexOf(actionName) < 0) {
-    throw new Error('Invalid operation: ' + actionName + ' Valid ones are: ' + validActions.join(','));
-  }
-
-  var onSuccess = function(result) {
-    if (beaconCallback) {
-      beaconCallback(result);
-    } else {
-      console.error('There is no callback to call with ', result);
-    }
-  };
-
-  var onFailure = function(error) {
-    if (errorCallback) {
-      errorCallback(error);
-    } else {
-      console.error('There was en error in the beacon registration process: ' + JSON.stringify(error));
-    }
-  };
-
-  var commandArguments = [region];
   if (extraArgs instanceof Array) {
     commandArguments = commandArguments.concat(extraArgs);
   }
@@ -54,12 +26,11 @@ var iBeacon = {
 
   startRangingBeaconsInRegion: function(regions, didRangeBeaconsCallback) {
 
-    if (!regions instanceof Array) {
+    if (!(regions instanceof Array)) {
       regions = [regions];
     }
 
     for (var i = 0; i < regions.length; i++) {
-      validateRegion(regions[i]);
       callNative('startRangingBeaconsInRegion', regions[i], didRangeBeaconsCallback);
     }
 
@@ -67,12 +38,11 @@ var iBeacon = {
 
   stopRangingBeaconsInRegion: function(regions) {
 
-    if (!regions instanceof Array) {
+    if (!(regions instanceof Array)) {
       regions = [regions];
     }
 
     for (var i = 0; i < regions.length; i++) {
-      validateRegion(regions[i]);
       callNative('stopRangingBeaconsInRegion', regions[i]);
     }
 
@@ -80,12 +50,11 @@ var iBeacon = {
 
   startMonitoringForRegion: function(regions, didDetermineStateCallback) {
 
-    if (!regions instanceof Array) {
+    if (!(regions instanceof Array)) {
       regions = [regions];
     }
 
     for (var i = 0; i < regions.length; i++) {
-      validateRegion(regions[i]);
       callNative('startMonitoringForRegion', regions[i], didDetermineStateCallback);
     }
 
@@ -93,30 +62,21 @@ var iBeacon = {
 
   stopMonitoringForRegion: function(regions) {
 
-    if (!regions instanceof Array) {
+    if (!(regions instanceof Array)) {
       regions = [regions];
     }
 
     for (var i = 0; i < regions.length; i++) {
-      validateRegion(regions[i]);
       callNative('stopMonitoringForRegion', regions[i]);
     }
 
   },
 
   isAdvertising: function(onSuccess) {
-
-    if (typeof(onSuccess) !== 'function') {
-      throw new TypeError('The onSuccess parameter has to be a callback function.');
-    }
-
-    exec(onSuccess, null, 'IBeacon', 'isAdvertising', []);
-
+    callNative('isAdvertising', null, onSuccess);
   },
 
   startAdvertising: function(region, onPeripheralManagerDidStartAdvertising, measuredPower) {
-
-    validateRegion(region);
 
     if (measuredPower) {
       return callNative('startAdvertising', region, onPeripheralManagerDidStartAdvertising, null, [measuredPower]);
@@ -127,7 +87,7 @@ var iBeacon = {
   },
 
   stopAdvertising: function(onSuccess) {
-    exec(onSuccess, null, 'IBeacon', 'stopAdvertising', []);
+    callNative('stopAdvertising', null, onSuccess);
   },
 
 };

@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp && karma start --single-run"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,10 @@
   "bugs": {
     "url": "https://github.com/schickling/cordova-ibeacon-plugin/issues"
   },
-  "homepage": "https://github.com/schickling/cordova-ibeacon-plugin"
+  "homepage": "https://github.com/schickling/cordova-ibeacon-plugin",
+  "devDependencies": {
+    "gulp": "^3.7.0",
+    "browserify": "^4.1.8",
+    "vinyl-source-stream": "^0.1.1"
+  }
 }
