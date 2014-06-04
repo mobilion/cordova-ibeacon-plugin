@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="org.apache.cordova.ibeacon" version="0.0.0">
+    id="me.schickling.ibeacon"
+    version="0.0.0">
 
     <name>ibeacon</name>
     <description>Cross-plattform iBeacon plugin for Cordova/Phonegap</description>
@@ -17,10 +18,28 @@
     </js-module>
     <js-module src="www/region.js" name="region" />
 
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="IBeacon" >
+                <param name="android-package" value="me.schickling.ibeacon.IBeacon" />
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.BLUETOOTH" />
+            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <service android:name="com.radiusnetworks.ibeacon.service.IBeaconService" />
+            <service android:name="com.radiusnetworks.ibeacon.IBeaconIntentProcessor" />
+        </config-file>
+        <source-file src="src/android/libs/AndroidIBeaconLibrary-0.7.7.jar" target-dir="libs" />
+        <source-file src="src/android/IBeacon.java" target-dir="src/me/schickling/ibeacon" />
+    </platform>
+
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
             <feature name="IBeacon">
-                <param name="ios-package" value="IBeacon"/>
+                <param name="ios-package" value="IBeacon" />
             </feature>
         </config-file>
         <framework src="CoreBluetooth.framework" />
