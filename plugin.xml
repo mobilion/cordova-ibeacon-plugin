@@ -20,8 +20,8 @@
 
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="IBeacon" >
-                <param name="android-package" value="me.schickling.ibeacon.IBeacon" />
+            <feature name="IBeaconPlugin" >
+                <param name="android-package" value="me.schickling.ibeacon.IBeaconPlugin" />
             </feature>
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest">
@@ -33,13 +33,13 @@
             <service android:name="com.radiusnetworks.ibeacon.IBeaconIntentProcessor" />
         </config-file>
         <source-file src="src/android/libs/AndroidIBeaconLibrary-0.7.7.jar" target-dir="libs" />
-        <source-file src="src/android/IBeacon.java" target-dir="src/me/schickling/ibeacon" />
+        <source-file src="src/android/IBeaconPlugin.java" target-dir="src/me/schickling/ibeacon" />
     </platform>
 
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
-            <feature name="IBeacon">
-                <param name="ios-package" value="IBeacon" />
+            <feature name="IBeaconPlugin">
+                <param name="ios-package" value="IBeaconPlugin" />
             </feature>
         </config-file>
         <framework src="CoreBluetooth.framework" />

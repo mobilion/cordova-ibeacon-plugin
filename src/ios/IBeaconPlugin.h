@@ -2,7 +2,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
-@interface IBeacon : CDVPlugin<CLLocationManagerDelegate, CBPeripheralManagerDelegate>
+@interface IBeaconPlugin : CDVPlugin<CLLocationManagerDelegate, CBPeripheralManagerDelegate>
 
 - (void)startAdvertising:(CDVInvokedUrlCommand*)command;
 - (void)stopAdvertising:(CDVInvokedUrlCommand*)command;

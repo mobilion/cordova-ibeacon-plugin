@@ -2,7 +2,7 @@ describe('ibeacon', function() {
 
   afterEach(function() {
     execCache.forEach(function(args) {
-      expect(args.className).toBe('IBeacon');
+      expect(args.className).toBe('IBeaconPlugin');
     });
     execCache.length = 0;
   });

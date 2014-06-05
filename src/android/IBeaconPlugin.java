@@ -17,7 +17,7 @@ import org.json.JSONObject;
 
 import java.util.Collection;
 
-public class IBeacon extends CordovaPlugin implements IBeaconConsumer {
+public class IBeaconPlugin extends CordovaPlugin implements IBeaconConsumer {
 
     private Context context;
     private IBeaconManager iBeaconManager;
@@ -63,7 +63,24 @@ public class IBeacon extends CordovaPlugin implements IBeaconConsumer {
     @Override
     public void onIBeaconServiceConnect() {
 
-        iBeaconManager.setRangeNotifier(new MyRangeNotifier());
+        iBeaconManager.setRangeNotifier(new RangeNotifier() {
+            @Override
+            public void didRangeBeaconsInRegion(Collection<IBeacon> iBeacons, Region region) {
+                Log.i("IBeaconManager", "i see them " + iBeacons.size());
+                try {
+                    // for (IBeacon )
+                    if (rangingCallback != null) {
+                        JSONObject o = new JSONObject();
+                        o.put("beacons", new JSONArray(iBeacons));
+                        PluginResult r = new PluginResult(PluginResult.Status.OK, o);
+                        r.setKeepCallback(true);
+                        rangingCallback.sendPluginResult(r);
+                    }
+                } catch (JSONException e) {
+                    Log.i("IBeaconManager", "damn json");
+                }
+            }
+        });
 
         try {
             iBeaconManager.startRangingBeaconsInRegion(new Region("A0B13730-3A9A-11E3-AA6E-0800200C9A66", null, null, null));
@@ -112,26 +129,6 @@ public class IBeacon extends CordovaPlugin implements IBeaconConsumer {
     }
 
     private void stopRangingBeaconsInRegion(JSONArray args, final CallbackContext callbackContext) {
-
-    }
-
-    private class MyRangeNotifier implements RangeNotifier {
-
-        public void didRangeBeaconsInRegion(Collection<com.radiusnetworks.ibeacon.IBeacon> iBeacons, Region region) {
-            Log.i("IBeaconManager", "i see " + iBeacons.size());
-            try {
-                if (rangingCallback != null) {
-                    JSONObject o = new JSONObject();
-                    o.put("beacons", new JSONArray(iBeacons));
-                    PluginResult r = new PluginResult(PluginResult.Status.OK, o);
-                    r.setKeepCallback(true);
-                    rangingCallback.sendPluginResult(r);
-                }
-            } catch (JSONException e) {
-                Log.i("IBeaconManager", "damn json");
-            }
-
-        }
 
     }
 

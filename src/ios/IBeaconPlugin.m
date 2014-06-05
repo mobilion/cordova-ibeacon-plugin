@@ -1,4 +1,4 @@
-#import "IBeacon.h"
+#import "IBeaconPlugin.h"
 
 #define DEBUG 1
 
@@ -8,7 +8,7 @@
 #define DebugLog(...)
 #endif
 
-@implementation IBeacon
+@implementation IBeaconPlugin
 {
     NSString *monitoringCallbackId;
     NSString *rangingCallbackId;

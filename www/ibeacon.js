@@ -16,7 +16,7 @@ var callNative = function(actionName, region, onSuccess, onFailure, extraArgs) {
     commandArguments = commandArguments.concat(extraArgs);
   }
 
-  exec(onSuccess, onFailure, 'IBeacon', actionName, commandArguments);
+  exec(onSuccess, onFailure, 'IBeaconPlugin', actionName, commandArguments);
 
 };
 
