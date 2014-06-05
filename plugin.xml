@@ -34,6 +34,7 @@
         </config-file>
         <source-file src="src/android/libs/AndroidIBeaconLibrary-0.7.7.jar" target-dir="libs" />
         <source-file src="src/android/IBeaconPlugin.java" target-dir="src/me/schickling/ibeacon" />
+        <source-file src="src/android/JSONHelper.java" target-dir="src/me/schickling/ibeacon" />
     </platform>
 
     <platform name="ios">

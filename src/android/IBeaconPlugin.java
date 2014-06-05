@@ -2,6 +2,8 @@ package me.schickling.ibeacon;
 
 import org.apache.cordova.*;
 
+import com.radiusnetworks.ibeacon.*;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -9,20 +11,19 @@ import android.content.ServiceConnection;
 import android.os.RemoteException;
 import android.util.Log;
 
-import com.radiusnetworks.ibeacon.*;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Collection;
+import java.util.HashMap;
 
 public class IBeaconPlugin extends CordovaPlugin implements IBeaconConsumer {
 
     private Context context;
     private IBeaconManager iBeaconManager;
 
-    private CallbackContext rangingCallback;
+    private HashMap<Region,CallbackContext> rangingCallbacks = new HashMap<Region,CallbackContext>();
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -66,25 +67,22 @@ public class IBeaconPlugin extends CordovaPlugin implements IBeaconConsumer {
         iBeaconManager.setRangeNotifier(new RangeNotifier() {
             @Override
             public void didRangeBeaconsInRegion(Collection<IBeacon> iBeacons, Region region) {
-                Log.i("IBeaconManager", "i see them " + iBeacons.size());
-                try {
-                    // for (IBeacon )
-                    if (rangingCallback != null) {
-                        JSONObject o = new JSONObject();
-                        o.put("beacons", new JSONArray(iBeacons));
-                        PluginResult r = new PluginResult(PluginResult.Status.OK, o);
-                        r.setKeepCallback(true);
-                        rangingCallback.sendPluginResult(r);
+                CallbackContext rangingCallback = rangingCallbacks.get(region);
+                if (rangingCallback != null) {
+                    try {
+                        JSONObject jsonResult = new JSONObject();
+                        jsonResult.put("beacons", JSONHelper.mapIBeacons(iBeacons));
+                        jsonResult.put("region", JSONHelper.mapRegion(region));
+                        PluginResult result = new PluginResult(PluginResult.Status.OK, jsonResult);
+                        result.setKeepCallback(true);
+                        rangingCallback.sendPluginResult(result);
+                    } catch (JSONException e) {
+                        rangingCallback.error("JSONException was thrown");
                     }
-                } catch (JSONException e) {
-                    Log.i("IBeaconManager", "damn json");
                 }
             }
         });
 
-        try {
-            iBeaconManager.startRangingBeaconsInRegion(new Region("A0B13730-3A9A-11E3-AA6E-0800200C9A66", null, null, null));
-        } catch (RemoteException e) {   }
     }
 
     @Override
@@ -125,10 +123,26 @@ public class IBeaconPlugin extends CordovaPlugin implements IBeaconConsumer {
     }
 
     private void startRangingBeaconsInRegion(JSONArray args, final CallbackContext callbackContext) {
-        rangingCallback = callbackContext;
+
+        try {
+            Region region = JSONHelper.mapRegion(args.getJSONObject(0));
+            rangingCallbacks.put(region, callbackContext);
+            iBeaconManager.startRangingBeaconsInRegion(region);
+        } catch (RemoteException e) {
+        } catch (JSONException e) {
+        }
+
     }
 
     private void stopRangingBeaconsInRegion(JSONArray args, final CallbackContext callbackContext) {
+
+        try {
+            Region region = JSONHelper.mapRegion(args.getJSONObject(0));
+            rangingCallbacks.remove(region);
+            iBeaconManager.stopRangingBeaconsInRegion(region);
+        } catch (RemoteException e) {
+        } catch (JSONException e) {
+        }
 
     }
 
