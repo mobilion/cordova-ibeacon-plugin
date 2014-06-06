@@ -1,9 +1,14 @@
 Integration tests
 =================
 
-All tests run under OSX with the following dependencies.
+All tests run under OSX with the following dependencies. An Android and/or iOS device is needed. The tests run in a Cordova application. Bluetooth on your computer needs to be turned on.
 
 ## Dependencies
+
+### Cordova
+```sh
+$ npm install -g cordova
+```
 
 ### Timeout
 ```sh
