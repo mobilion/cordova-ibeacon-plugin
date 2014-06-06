@@ -44,8 +44,8 @@
             </feature>
         </config-file>
         <framework src="CoreBluetooth.framework" />
-        <header-file src="src/ios/IBeacon.h" />
-        <source-file src="src/ios/IBeacon.m" />
+        <header-file src="src/ios/IBeaconPlugin.h" />
+        <source-file src="src/ios/IBeaconPlugin.m" />
     </platform>
 
 </plugin>
