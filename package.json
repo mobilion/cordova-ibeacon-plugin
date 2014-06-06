@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "gulp && karma start --single-run"
+    "test": "gulp && karma start test/unit/karma.conf.js --single-run"
   },
   "repository": {
     "type": "git",

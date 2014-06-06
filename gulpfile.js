@@ -6,7 +6,7 @@ var source = require('vinyl-source-stream');
 
 gulp.task('default', function() {
   return browserify('./www/ibeacon.js')
-    .require('./test/mock/cordova.exec.js', {
+    .require('./test/unit/mock/cordova.exec.js', {
       expose: 'cordova/exec'
     })
     .external('cordova/exec')
@@ -15,5 +15,5 @@ gulp.task('default', function() {
       standalone: 'ibeacon',
     })
     .pipe(source('ibeacon.js'))
-    .pipe(gulp.dest('test/.tmp'));
+    .pipe(gulp.dest('test/unit/.tmp'));
 });
