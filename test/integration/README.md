@@ -5,10 +5,9 @@ All tests run under OSX with the following dependencies.
 
 ## Dependencies
 
-### Timeout (from `coreutils`)
+### Timeout
 ```sh
 $ brew install coreutils
-$ gtimeout 10 command
 ```
 
 ### ADB
