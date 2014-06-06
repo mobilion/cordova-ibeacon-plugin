@@ -149,17 +149,30 @@ public class IBeaconPlugin extends CordovaPlugin implements IBeaconConsumer {
         iBeaconManager.setMonitorNotifier(new MonitorNotifier() {
 
             @Override
-            public void didEnterRegion(Region region) {
-                Log.i("IBeaconManager", "I just saw an iBeacon for the firt time!");
-            }
+            public void didEnterRegion(Region region) {}
 
             @Override
-            public void didExitRegion(Region region) {
-                Log.i("IBeaconManager", "I no longer see an iBeacon");
-            }
+            public void didExitRegion(Region region) {}
 
             @Override
-            public void didDetermineStateForRegion(int state, Region region) {}
+            public void didDetermineStateForRegion(int state, Region region) {
+
+                CallbackContext monitoringCallback = monitoringCallbacks.get(region);
+
+                if (monitoringCallback != null) {
+                    try {
+                        JSONObject jsonResult = new JSONObject();
+                        jsonResult.put("state", (state == MonitorNotifier.INSIDE) ? "inside" : "outside");
+
+                        PluginResult result = new PluginResult(PluginResult.Status.OK, jsonResult);
+                        result.setKeepCallback(true);
+                        monitoringCallback.sendPluginResult(result);
+                    } catch (JSONException e) {
+                        monitoringCallback.error("JSONException was thrown");
+                    }
+                }
+
+            }
 
         });
 
