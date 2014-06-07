@@ -5,12 +5,13 @@ document.addEventListener('deviceready', loadTests, false);
 function loadTests() {
   [
     'lib/jasmine-2.0.0/boot.js',
+    'spec/monitoring.js',
   ].forEach(loadScript);
 
   // timeout and window.onload needed to start tests
   setTimeout(function() {
     window.onload();
-  }, 100);
+  }, 1000);
 };
 
 function loadScript(src) {

@@ -1,22 +1,13 @@
 'use strict';
 
 var Region = function(region) {
-  this.uuid = region.uuid;
+  this.uuid = region.uuid.toLowerCase();
   this.major = region.major || null;
   this.minor = region.minor || null;
   this.identifier = region.identifier;
 
   this.validate();
 };
-
-Region.prototype._isValidUuid = function(uuid) {
-  var uuidValidatorRegex = this._getUuidValidatorRegex();
-  return uuid.match(uuidValidatorRegex) != null;
-};
-
-Region.prototype._getUuidValidatorRegex = function() {
-  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-}
 
 Region.prototype.validate = function() {
   // Parameter uuid
@@ -50,6 +41,19 @@ Region.prototype.validate = function() {
   }
 
 };
+
+Region.prototype.equals = function (region) {
+  return this.uuid === region.uuid && this.identifier === region.identifier && this.major === region.major && this.minor === region.minor;
+};
+
+Region.prototype._isValidUuid = function(uuid) {
+  var uuidValidatorRegex = this._getUuidValidatorRegex();
+  return uuid.match(uuidValidatorRegex) != null;
+};
+
+Region.prototype._getUuidValidatorRegex = function() {
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+}
 
 function isBlank(str) {
   return (!str || /^\s*$/.test(str));

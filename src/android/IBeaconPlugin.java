@@ -15,12 +15,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.HashMap;
 
 public class IBeaconPlugin extends CordovaPlugin implements IBeaconConsumer {
 
     private Context context;
+    private boolean isServiceConnected = false;
+    private LinkedList<Command> commandQueue  = new LinkedList<Command>();
     private IBeaconManager iBeaconManager;
     private HashMap<Region,CallbackContext> rangingCallbacks = new HashMap<Region,CallbackContext>();
     private HashMap<Region,CallbackContext> monitoringCallbacks = new HashMap<Region,CallbackContext>();
@@ -28,8 +34,14 @@ public class IBeaconPlugin extends CordovaPlugin implements IBeaconConsumer {
     @Override
     public void onIBeaconServiceConnect() {
 
+        isServiceConnected = true;
+
         initMonitorNotifier();
         initRangeNotifier();
+
+        try {
+            executeQueuedCommands();
+        } catch (JSONException e) {}
 
     }
 
@@ -58,30 +70,53 @@ public class IBeaconPlugin extends CordovaPlugin implements IBeaconConsumer {
 
     @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
-        if (action.equals("startAdvertising")) {
+
+        if (!isServiceConnected) {
+            commandQueue.push(new Command(action, args, callbackContext));
+        } else if (action.equals("startAdvertising")) {
             startAdvertising(args, callbackContext);
-            return true;
         } else if (action.equals("stopAdvertising")) {
             stopAdvertising(args, callbackContext);
-            return true;
         } else if (action.equals("isAdvertising")) {
             isAdvertising(args, callbackContext);
-            return true;
         } else if (action.equals("startMonitoringForRegion")) {
             startMonitoringForRegion(args, callbackContext);
-            return true;
         } else if (action.equals("stopMonitoringForRegion")) {
             stopMonitoringForRegion(args, callbackContext);
-            return true;
         } else if (action.equals("startRangingBeaconsInRegion")) {
             startRangingBeaconsInRegion(args, callbackContext);
-            return true;
         } else if (action.equals("stopRangingBeaconsInRegion")) {
             stopRangingBeaconsInRegion(args, callbackContext);
-            return true;
-        } else {
-            return false;
         }
+
+        return isValidAction(action);
+
+    }
+
+    private boolean isValidAction(String action) {
+
+        List<String> validActions = Arrays.asList(
+                "startMonitoringForRegion",
+                "stopMonitoringForRegion",
+                "stopRangingBeaconsInRegion",
+                "stopRangingBeaconsInRegion"
+                );
+
+        return validActions.contains(action);
+
+    }
+
+    private void executeQueuedCommands() throws JSONException {
+
+       ListIterator<Command> itr = commandQueue.listIterator();
+       Command c;
+
+       while (itr.hasNext()) {
+           c = itr.next();
+           execute(c.getAction(), c.getArgs(), c.getCallbackContext());
+           itr.remove();
+       }
+
     }
 
     private void startAdvertising(JSONArray args, final CallbackContext callbackContext) {
@@ -163,6 +198,7 @@ public class IBeaconPlugin extends CordovaPlugin implements IBeaconConsumer {
                     try {
                         JSONObject jsonResult = new JSONObject();
                         jsonResult.put("state", (state == MonitorNotifier.INSIDE) ? "inside" : "outside");
+                        jsonResult.put("region", JSONHelper.mapRegion(region));
 
                         PluginResult result = new PluginResult(PluginResult.Status.OK, jsonResult);
                         result.setKeepCallback(true);
