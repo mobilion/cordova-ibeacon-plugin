@@ -260,15 +260,11 @@
 - (NSString *)nameOfRegionState:(CLRegionState)state {
     switch (state) {
         case CLRegionStateInside:
-            return @"CLRegionStateInside";
-            break;
+            return @"inside";
         case CLRegionStateOutside:
-            return @"CLRegionStateOutside";
-        case CLRegionStateUnknown:
-            return @"CLRegionStateUnknown";
+            return @"outside";
         default:
-            return @"ErrorUnknownCLRegionStateObjectReceived";
-            break;
+            return @"error";
     }
 }
 
@@ -276,9 +272,7 @@
     NSMutableDictionary *dict;
 
     // identifier
-    if (region.identifier != nil) {
-        [dict setObject:region.identifier forKey:@"identifier"];
-    }
+    [dict setObject:region.identifier forKey:@"identifier"];
 
     if ([region isKindOfClass:[CLBeaconRegion class]]) {
         CLBeaconRegion *beaconRegion = (CLBeaconRegion*)region;
@@ -312,6 +306,10 @@
 
     if (region.minor != nil) {
         [dict setObject:region.minor forKey:@"minor"];
+    }
+
+    if (region.identifier != nil) {
+        [dict setObject:region.identifier forKey:@"identifier"];
     }
 
     return dict;
