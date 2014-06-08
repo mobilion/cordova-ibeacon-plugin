@@ -1,5 +1,15 @@
 'use strict';
 
+var socket = io.connect('http://LOCAL_IP:3000');
+
+function advertise(timeout, uuid, major, minor) {
+  socket.emit('advertise', timeout, uuid, major, minor);
+};
+
+function killServer() {
+  socket.emit('kill');
+};
+
 document.addEventListener('deviceready', loadTests, false);
 
 function loadTests() {

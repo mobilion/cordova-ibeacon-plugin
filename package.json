@@ -34,6 +34,7 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-jasmine": "^0.1.5",
     "phantomjs": "^1.9.7-8",
-    "karma-cli": "0.0.4"
+    "karma-cli": "0.0.4",
+    "socket.io": "^1.0.4"
   }
 }
