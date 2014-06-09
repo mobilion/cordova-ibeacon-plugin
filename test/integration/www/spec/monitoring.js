@@ -2,13 +2,17 @@
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
 
-var IBEACON_TIMEOUT_INTERVAL = 1200;
-
 describe('monitoring', function() {
 
   var region = new ibeacon.Region({
     identifier: 'monitoring-test',
     uuid: uuid.v4(),
+  });
+
+  var tolerance;
+
+  beforeEach(function() {
+    tolerance = 1;
   });
 
   afterEach(clean);
@@ -17,28 +21,26 @@ describe('monitoring', function() {
 
     advertise(region.uuid);
 
-    setTimeout(function() {
+    ibeacon.startMonitoringForRegion(region, function(result) {
 
-      ibeacon.startMonitoringForRegion(region, function(result) {
+      if (tolerance-- > 0 && result.state !== 'inside') return;
 
-        expect(result.state).toBe('inside');
-        expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
+      expect(result.state).toBe('inside');
+      expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
 
-        ibeacon.stopMonitoringForRegion(region);
+      ibeacon.stopMonitoringForRegion(region);
 
-        setTimeout(function() {
-          done();
-        }, IBEACON_TIMEOUT_INTERVAL);
+      done();
 
-      });
-
-    }, IBEACON_TIMEOUT_INTERVAL);
+    });
 
   });
 
   it('should be outside', function(done) {
 
     ibeacon.startMonitoringForRegion(region, function(result) {
+
+      if (tolerance-- > 0 && result.state !== 'outside') return;
 
       expect(result.state).toBe('outside');
       expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
@@ -56,32 +58,30 @@ describe('monitoring', function() {
 
     advertise(region.uuid);
 
-    setTimeout(function() {
+    ibeacon.startMonitoringForRegion(region, function(result) {
 
-      ibeacon.startMonitoringForRegion(region, function(result) {
+      if (callbackCounter === 0) {
 
-        if (callbackCounter === 0) {
+        if (tolerance-- > 0 && result.state !== 'inside') return;
 
-          expect(result.state).toBe('inside');
-          expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
+        expect(result.state).toBe('inside');
+        expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
 
-          clean();
+        clean();
 
-          callbackCounter++;
+        callbackCounter++;
 
-        } else {
+      } else {
 
-          expect(result.state).toBe('outside');
-          expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
+        expect(result.state).toBe('outside');
+        expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
 
-          ibeacon.stopMonitoringForRegion(region);
-          done();
+        ibeacon.stopMonitoringForRegion(region);
+        done();
 
-        }
+      }
 
-      });
-
-    }, IBEACON_TIMEOUT_INTERVAL);
+    });
 
   });
 
@@ -92,6 +92,8 @@ describe('monitoring', function() {
     ibeacon.startMonitoringForRegion(region, function(result) {
 
       if (callbackCounter === 0) {
+
+        if (tolerance-- > 0 && result.state !== 'outside') return;
 
         expect(result.state).toBe('outside');
         expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
