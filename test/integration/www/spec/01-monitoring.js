@@ -1,7 +1,5 @@
 'use strict';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
-
 describe('monitoring', function() {
 
   var region = new ibeacon.Region({
@@ -114,11 +112,6 @@ describe('monitoring', function() {
 
     });
 
-  });
-
-
-  it('should kill server after all tests', function() {
-    killServer();
   });
 
 });
