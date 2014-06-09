@@ -6,6 +6,10 @@ function advertise(timeout, uuid, major, minor) {
   socket.emit('advertise', timeout, uuid, major, minor);
 };
 
+function clean() {
+  socket.emit('clean');
+};
+
 function killServer() {
   socket.emit('kill');
 };
