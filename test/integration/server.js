@@ -27,15 +27,24 @@ io.on('connection', function(socket) {
 
   });
 
+  socket.on('clean', function() {
+    killChildProcesses();
+  });
+
   socket.on('kill', function() {
+
+    killChildProcesses();
+    process.exit(0);
+
+  });
+
+  function killChildProcesses() {
 
     childProcesses.forEach(function(childProcess) {
       childProcess.kill();
     });
 
-    process.exit(0);
-
-  });
+  };
 
 });
 
