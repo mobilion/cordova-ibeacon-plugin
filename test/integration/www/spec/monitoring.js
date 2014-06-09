@@ -1,6 +1,6 @@
 'use strict';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 40000;
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 50000;
 
 describe('monitoring', function() {
 
@@ -9,20 +9,25 @@ describe('monitoring', function() {
     uuid: uuid.v4(),
   });
 
+  afterEach(clean);
+
   it('should be inside', function(done) {
 
     advertise(region.uuid);
 
-    ibeacon.startMonitoringForRegion(region, function(result) {
+    setTimeout(function() {
 
-      expect(result.state).toBe('inside');
-      expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
+      ibeacon.startMonitoringForRegion(region, function(result) {
 
-      clean();
-      ibeacon.stopMonitoringForRegion(region);
-      done();
+        expect(result.state).toBe('inside');
+        expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
 
-    });
+        ibeacon.stopMonitoringForRegion(region);
+        done();
+
+      });
+
+    }, 500);
 
   });
 
@@ -33,7 +38,6 @@ describe('monitoring', function() {
       expect(result.state).toBe('outside');
       expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
 
-      clean();
       ibeacon.stopMonitoringForRegion(region);
       done();
 
@@ -47,28 +51,32 @@ describe('monitoring', function() {
 
     advertise(region.uuid);
 
-    ibeacon.startMonitoringForRegion(region, function(result) {
+    setTimeout(function() {
 
-      if (callbackCounter === 0) {
+      ibeacon.startMonitoringForRegion(region, function(result) {
 
-        expect(result.state).toBe('inside');
-        expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
+        if (callbackCounter === 0) {
 
-        clean();
+          expect(result.state).toBe('inside');
+          expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
 
-        callbackCounter++;
+          clean();
 
-      } else {
+          callbackCounter++;
 
-        expect(result.state).toBe('outside');
-        expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
+        } else {
 
-        ibeacon.stopMonitoringForRegion(region);
-        done();
+          expect(result.state).toBe('outside');
+          expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
 
-      }
+          ibeacon.stopMonitoringForRegion(region);
+          done();
 
-    });
+        }
+
+      });
+
+    }, 500);
 
   });
 
