@@ -2,8 +2,8 @@
 
 var socket = io.connect('http://LOCAL_IP:3000');
 
-function advertise(timeout, uuid, major, minor) {
-  socket.emit('advertise', timeout, uuid, major, minor);
+function advertise(uuid, major, minor) {
+  socket.emit('advertise', uuid, major, minor);
 };
 
 function clean() {

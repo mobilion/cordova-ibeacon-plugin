@@ -11,7 +11,7 @@ describe('monitoring', function() {
 
   it('should be inside', function(done) {
 
-    advertise(4000, region.uuid);
+    advertise(region.uuid);
 
     ibeacon.startMonitoringForRegion(region, function(result) {
 
@@ -45,7 +45,7 @@ describe('monitoring', function() {
 
     var callbackCounter = 0;
 
-    advertise(4000, region.uuid);
+    advertise(region.uuid);
 
     ibeacon.startMonitoringForRegion(region, function(result) {
 
@@ -53,6 +53,8 @@ describe('monitoring', function() {
 
         expect(result.state).toBe('inside');
         expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
+
+        clean();
 
         callbackCounter++;
 

@@ -5,7 +5,7 @@ io.on('connection', function(socket) {
 
   var childProcesses = [];
 
-  socket.on('advertise', function(timeout, uuid, major, minor) {
+  socket.on('advertise', function(uuid, major, minor) {
 
     var command = 'ibeacon --broadcast --uuid ' + uuid;
 
@@ -17,9 +17,7 @@ io.on('connection', function(socket) {
       command += ' --minor ' + minor;
     }
 
-    var childProcess = exec(command, {
-      timeout: timeout
-    }, function () {
+    var childProcess = exec(command, function () {
       childProcesses.splice(childProcesses.indexOf(childProcess), 1);
     });
 
