@@ -126,12 +126,27 @@ var ibeacon = {
     checkParam(options, 'region');
     checkParam(options, 'didRangeBeacons');
 
+    var successCallback = function(result) {
+
+      var beacons = result.beacons.map(function(beacon) {
+        return new Beacon(beacon);
+      });
+
+      var region = new Region(result.region);
+
+      options.didRangeBeacons({
+        region: region,
+        beacons: beacons,
+      });
+
+    };
+
     if (!(options.region instanceof Array)) {
       options.region = [options.region];
     }
 
     for (var i = 0; i < options.region.length; i++) {
-      callNative('startRangingBeaconsInRegion', options.region[i], options.didRangeBeacons);
+      callNative('startRangingBeaconsInRegion', options.region[i], successCallback);
     }
 
   },
