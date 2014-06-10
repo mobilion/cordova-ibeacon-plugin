@@ -2,6 +2,7 @@
 
 var exec = require('cordova/exec');
 var Region = require('./region');
+var Beacon = require('./beacon');
 
 var callNative = function(actionName, region, onSuccess, onFailure, extraArgs) {
 
@@ -46,6 +47,8 @@ var ibeacon = {
 
   Region: Region,
 
+  Beacon: Beacon,
+
   startAdvertising: function(region, onDidStartAdvertising, measuredPower) {
 
     if (measuredPower) {
@@ -71,19 +74,24 @@ var ibeacon = {
 
     var successCallback = function(result) {
 
+      var region = new Region(result.region);
+
       if (options.hasOwnProperty('didDetermineState')) {
-        options.didDetermineState(result);
+        options.didDetermineState({
+          region: region,
+          state: result.state
+        });
       }
 
       if (options.hasOwnProperty('didEnter') && result.state === 'inside') {
         options.didEnter({
-          region: result.region
+          region: region
         });
       }
 
       if (options.hasOwnProperty('didExit') && result.state === 'outside') {
         options.didExit({
-          region: result.region
+          region: region
         });
       }
 
@@ -113,26 +121,31 @@ var ibeacon = {
 
   },
 
-  startRangingBeaconsInRegion: function(regions, didRangeBeaconsCallback) {
+  startRangingBeaconsInRegion: function(options) {
 
-    if (!(regions instanceof Array)) {
-      regions = [regions];
+    checkParam(options, 'region');
+    checkParam(options, 'didRangeBeacons');
+
+    if (!(options.region instanceof Array)) {
+      options.region = [options.region];
     }
 
-    for (var i = 0; i < regions.length; i++) {
-      callNative('startRangingBeaconsInRegion', regions[i], didRangeBeaconsCallback);
+    for (var i = 0; i < options.region.length; i++) {
+      callNative('startRangingBeaconsInRegion', options.region[i], options.didRangeBeacons);
     }
 
   },
 
-  stopRangingBeaconsInRegion: function(regions) {
+  stopRangingBeaconsInRegion: function(options) {
 
-    if (!(regions instanceof Array)) {
-      regions = [regions];
+    checkParam(options, 'region');
+
+    if (!(options.region instanceof Array)) {
+      options.region = [options.region];
     }
 
-    for (var i = 0; i < regions.length; i++) {
-      callNative('stopRangingBeaconsInRegion', regions[i]);
+    for (var i = 0; i < options.region.length; i++) {
+      callNative('stopRangingBeaconsInRegion', options.region[i]);
     }
 
   },

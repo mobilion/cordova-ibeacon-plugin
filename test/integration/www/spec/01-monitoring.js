@@ -35,7 +35,7 @@ describe('monitoring', function() {
       if (tolerance-- > 0 && result.state !== 'inside') return;
 
       expect(result.state).toBe('inside');
-      expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
+      expect(region.equals(result.region)).toBe(true);
 
       done();
 
@@ -56,7 +56,7 @@ describe('monitoring', function() {
 
     var didEnter = function(result) {
 
-      expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
+      expect(region.equals(result.region)).toBe(true);
 
       done();
 
@@ -78,7 +78,7 @@ describe('monitoring', function() {
       if (tolerance-- > 0 && result.state !== 'outside') return;
 
       expect(result.state).toBe('outside');
-      expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
+      expect(region.equals(result.region)).toBe(true);
 
       done();
 
@@ -97,7 +97,7 @@ describe('monitoring', function() {
 
     var didExit = function(result) {
 
-      expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
+      expect(region.equals(result.region)).toBe(true);
 
       done();
 
@@ -125,7 +125,7 @@ describe('monitoring', function() {
         if (tolerance-- > 0 && result.state !== 'inside') return;
 
         expect(result.state).toBe('inside');
-        expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
+        expect(region.equals(result.region)).toBe(true);
 
         clean();
 
@@ -134,7 +134,7 @@ describe('monitoring', function() {
       } else {
 
         expect(result.state).toBe('outside');
-        expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
+        expect(region.equals(result.region))).toBe(true);
 
         done();
 
@@ -162,7 +162,7 @@ describe('monitoring', function() {
         if (tolerance-- > 0 && result.state !== 'outside') return;
 
         expect(result.state).toBe('outside');
-        expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
+        expect(region.equals(result.region)).toBe(true);
 
         advertise(region.uuid);
 
@@ -171,7 +171,7 @@ describe('monitoring', function() {
       } else {
 
         expect(result.state).toBe('inside');
-        expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
+        expect(region.equals(result.region)).toBe(true);
 
         done();
 

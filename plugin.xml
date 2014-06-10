@@ -17,6 +17,8 @@
         <clobbers target="ibeacon" />
     </js-module>
     <js-module src="www/region.js" name="region" />
+    <js-module src="www/beacon.js" name="beacon" />
+    <js-module src="www/helper.js" name="helper" />
 
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
