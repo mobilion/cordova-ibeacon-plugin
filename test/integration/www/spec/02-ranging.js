@@ -2,48 +2,103 @@
 
 describe('ranging', function() {
 
+  var testUuid = uuid.v4();
+
   var region = new ibeacon.Region({
     identifier: 'monitoring-test',
-    uuid: uuid.v4(),
+    uuid: testUuid,
+  });
+
+  var regionWithMajor = new ibeacon.Region({
+    identifier: 'monitoring-test',
+    uuid: testUuid,
+    major: 11111,
+  });
+
+  var regionWithMajorAndMinor = new ibeacon.Region({
+    identifier: 'monitoring-test',
+    uuid: testUuid,
+    major: 11111,
+    minor: 22222,
+  });
+
+  var beaconA = new ibeacon.Beacon({
+    uuid: testUuid,
+    major: 11111,
+    minor: 22222,
+  });
+
+  var beaconB = new ibeacon.Beacon({
+    uuid: testUuid,
+    major: 11111,
+    minor: 22223,
+  });
+
+  var beaconC = new ibeacon.Beacon({
+    uuid: testUuid,
+    major: 11112,
+    minor: 22222,
+  });
+
+  var tolerance;
+
+  beforeEach(function() {
+
+    tolerance = 1;
+
   });
 
   afterEach(clean);
 
   it('should range one beacon', function(done) {
 
-    var major = 12345;
-    var minor = 67890;
+    advertise(beaconC.uuid, beaconC.major, beaconC.minor);
 
-    advertise(region.uuid, major, minor);
+    var didRangeBeacons = function(result) {
 
-    ibeacon.startRangingBeaconsInRegion(region, function(result) {
+      if (tolerance-- > 0 && result.beacons.length !== 1) return;
 
       expect(result.beacons.length).toBe(1);
-      expect(result.beacons[0].uuid).toBe(region.uuid);
-      expect(result.beacons[0].major).toBe(major);
-      expect(result.beacons[0].minor).toBe(minor);
-      expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
+      expect(beaconC.equals(result.beacons[0])).toBe(true);
+      expect(regionWithMajorAndMinor.equals(result.region)).toBe(true);
 
-      ibeacon.stopRangingBeaconsInRegion(region);
+      ibeacon.stopRangingBeaconsInRegion(beaconC);
       done();
 
-    });
+    };
+
+    var options = {
+      region: regionWithMajorAndMinor,
+      didRangeBeacons: didRangeBeacons,
+    }
+
+    ibeacon.startRangingBeaconsInRegion(options);
 
   });
 
   it('should range two beacons', function(done) {
 
-    advertise(region.uuid, major, minor);
-    advertise(region.uuid, major, minor);
+    advertise(beaconA.uuid, beaconA.major, beaconA.minor);
+    advertise(beaconB.uuid, beaconB.major, beaconB.minor);
 
-    ibeacon.startRangingBeaconsInRegion(region, function(result) {
+    var didRangeBeacons = function(result) {
+
+      if (tolerance-- > 0 && result.beacons.length !== 2) return;
 
       expect(result.beacons.length).toBe(2);
+      expect(regionWithMajor.equals(result.region)).toBe(true);
 
       ibeacon.stopRangingBeaconsInRegion(region);
       done();
 
-    });
+    };
+
+    var options = {
+      region: regionWithMajor,
+      didRangeBeacons: didRangeBeacons,
+    }
+
+    ibeacon.startRangingBeaconsInRegion(options);
 
   });
 

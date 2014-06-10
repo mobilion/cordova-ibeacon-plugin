@@ -134,7 +134,7 @@ describe('monitoring', function() {
       } else {
 
         expect(result.state).toBe('outside');
-        expect(region.equals(result.region))).toBe(true);
+        expect(region.equals(result.region)).toBe(true);
 
         done();
 
