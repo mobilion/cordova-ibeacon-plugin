@@ -21,9 +21,8 @@ rm -rf platforms plugins
 mkdir platforms plugins
 ln -s $PLUGIN_DIR $SCRIPT_DIR/plugins/$PLUGIN_NAME
 
-# add platforms
-cordova platform add android
-cordova platform add ios
+# add platform
+cordova platform add $PLATFORM
 
 # start socket server
 node server.js &
