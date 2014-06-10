@@ -9,7 +9,7 @@ describe('ranging', function() {
 
   afterEach(clean);
 
-  it('should range on beacon', function(done) {
+  it('should range one beacon', function(done) {
 
     var major = 12345;
     var minor = 67890;
@@ -23,7 +23,23 @@ describe('ranging', function() {
       expect(result.beacons[0].major).toBe(major);
       expect(result.beacons[0].minor).toBe(minor);
       expect(region.equals(new ibeacon.Region(result.region))).toBe(true);
-      
+
+      ibeacon.stopRangingBeaconsInRegion(region);
+      done();
+
+    });
+
+  });
+
+  it('should range two beacons', function(done) {
+
+    advertise(region.uuid, major, minor);
+    advertise(region.uuid, major, minor);
+
+    ibeacon.startRangingBeaconsInRegion(region, function(result) {
+
+      expect(result.beacons.length).toBe(2);
+
       ibeacon.stopRangingBeaconsInRegion(region);
       done();
 

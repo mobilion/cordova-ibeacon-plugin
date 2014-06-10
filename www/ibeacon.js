@@ -20,6 +20,28 @@ var callNative = function(actionName, region, onSuccess, onFailure, extraArgs) {
 
 };
 
+var checkParam = function(object) {
+
+  var properties = Array.prototype.slice.apply(arguments, [1]);
+  var propertyFound = false;
+  var missingProperties = [];
+
+  properties.forEach(function(property) {
+
+    if (object.hasOwnProperty(property)) {
+      propertyFound = true;
+    } else {
+      missingProperties.push(property);
+    }
+
+  });
+
+  if (!propertyFound) {
+    throw new Error('Missing option. None of the following properties are specified: ' + missingProperties.join(', '));
+  }
+
+};
+
 var ibeacon = {
 
   Region: Region,
@@ -42,26 +64,51 @@ var ibeacon = {
     callNative('isAdvertising', null, onSuccess);
   },
 
-  startMonitoringForRegion: function(regions, didDetermineStateCallback) {
+  startMonitoringForRegion: function(options) {
 
-    if (!(regions instanceof Array)) {
-      regions = [regions];
+    checkParam(options, 'region');
+    checkParam(options, 'didDetermineState', 'didEnter', 'didExit');
+
+    var successCallback = function(result) {
+
+      if (options.hasOwnProperty('didDetermineState')) {
+        options.didDetermineState(result);
+      }
+
+      if (options.hasOwnProperty('didEnter') && result.state === 'inside') {
+        options.didEnter({
+          region: result.region
+        });
+      }
+
+      if (options.hasOwnProperty('didExit') && result.state === 'outside') {
+        options.didExit({
+          region: result.region
+        });
+      }
+
+    };
+
+    if (!(options.region instanceof Array)) {
+      options.region = [options.region];
     }
 
-    for (var i = 0; i < regions.length; i++) {
-      callNative('startMonitoringForRegion', regions[i], didDetermineStateCallback);
+    for (var i = 0; i < options.region.length; i++) {
+      callNative('startMonitoringForRegion', options.region[i], successCallback);
     }
 
   },
 
-  stopMonitoringForRegion: function(regions) {
+  stopMonitoringForRegion: function(options) {
 
-    if (!(regions instanceof Array)) {
-      regions = [regions];
+    checkParam(options, 'region');
+
+    if (!(options.region instanceof Array)) {
+      options.region = [options.region];
     }
 
-    for (var i = 0; i < regions.length; i++) {
-      callNative('stopMonitoringForRegion', regions[i]);
+    for (var i = 0; i < options.region.length; i++) {
+      callNative('stopMonitoringForRegion', options.region[i]);
     }
 
   },

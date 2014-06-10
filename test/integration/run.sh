@@ -27,6 +27,7 @@ cordova platform add ios
 
 # start socket server
 node server.js &
+NODE_PID=$?
 
 # run on device
 cordova run $PLATFORM
@@ -35,3 +36,5 @@ cordova run $PLATFORM
 rm www/{index.html,js/index.js}
 mv www/index.html.org www/index.html
 mv www/js/index.js.org www/js/index.js
+killall ibeacon
+kill $NODE_PID
