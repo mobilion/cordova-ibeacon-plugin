@@ -98,7 +98,7 @@ public class IBeaconPlugin extends CordovaPlugin implements IBeaconConsumer {
         List<String> validActions = Arrays.asList(
                 "startMonitoringForRegion",
                 "stopMonitoringForRegion",
-                "stopRangingBeaconsInRegion",
+                "startRangingBeaconsInRegion",
                 "stopRangingBeaconsInRegion"
                 );
 
