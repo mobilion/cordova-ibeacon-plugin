@@ -34,6 +34,12 @@ describe('ranging', function() {
     minor: 22223,
   });
 
+  var beaconC = new ibeacon.Beacon({
+    uuid: testUuid,
+    major: 11112,
+    minor: 22223,
+  });
+
   var tolerance;
 
   beforeEach(function() {
@@ -67,7 +73,7 @@ describe('ranging', function() {
     var options = {
       region: regionWithMajorAndMinor,
       didRangeBeacons: didRangeBeacons,
-    }
+    };
 
     ibeacon.startRangingBeaconsInRegion(options);
 
@@ -96,7 +102,37 @@ describe('ranging', function() {
     var options = {
       region: regionWithMajor,
       didRangeBeacons: didRangeBeacons,
-    }
+    };
+
+    ibeacon.startRangingBeaconsInRegion(options);
+
+  });
+
+  xit('should range three beacons', function(done) {
+
+    advertise(beaconA.uuid, beaconA.major, beaconA.minor);
+    advertise(beaconB.uuid, beaconB.major, beaconB.minor);
+    advertise(beaconC.uuid, beaconC.major, beaconC.minor);
+
+    var didRangeBeacons = function(result) {
+
+      if (tolerance-- > 0 && result.beacons.length !== 3) return;
+
+      expect(result.beacons.length).toBe(3);
+      expect(region.equals(result.region)).toBe(true);
+
+      ibeacon.stopRangingBeaconsInRegion({
+        region: region
+      });
+
+      done();
+
+    };
+
+    var options = {
+      region: regionWithMajor,
+      didRangeBeacons: didRangeBeacons,
+    };
 
     ibeacon.startRangingBeaconsInRegion(options);
 

@@ -1,0 +1,24 @@
+{
+
+  "extends": "../../.jshintrc",
+
+  "globals": {
+    "describe": false,
+    "xdescribe": false,
+    "expect": false,
+    "it": false,
+    "xit": false,
+    "before": false,
+    "beforeEach": false,
+    "after": false,
+    "afterEach": false,
+    "jasmine": false,
+    "io": false,
+    "ibeacon": false,
+    "advertise": false,
+    "clean": false,
+    "killServer": false,
+    "uuid": false
+  }
+
+}

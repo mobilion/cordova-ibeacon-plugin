@@ -6,7 +6,7 @@ var source = require('vinyl-source-stream');
 var jshint = require('gulp-jshint');
 
 gulp.task('hint', function() {
-  return gulp.src(['www/*.js', 'test/unit/**/*.js', 'test/integration/www/js/*.js', 'test/integration/www/spec/*.js'])
+  return gulp.src(['www/*.js', 'test/unit/spec/*.js', 'test/integration/www/js/*.js', 'test/integration/www/spec/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });

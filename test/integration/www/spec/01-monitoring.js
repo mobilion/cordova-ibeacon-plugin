@@ -44,7 +44,7 @@ describe('monitoring', function() {
     var options = {
       region: region,
       didDetermineState: didDetermineState,
-    }
+    };
 
     ibeacon.startMonitoringForRegion(options);
 
@@ -65,7 +65,7 @@ describe('monitoring', function() {
     var options = {
       region: region,
       didEnter: didEnter,
-    }
+    };
 
     ibeacon.startMonitoringForRegion(options);
 
@@ -87,7 +87,7 @@ describe('monitoring', function() {
     var options = {
       region: region,
       didDetermineState: didDetermineState,
-    }
+    };
 
     ibeacon.startMonitoringForRegion(options);
 
@@ -106,7 +106,7 @@ describe('monitoring', function() {
     var options = {
       region: region,
       didExit: didExit,
-    }
+    };
 
     ibeacon.startMonitoringForRegion(options);
 
@@ -145,7 +145,7 @@ describe('monitoring', function() {
     var options = {
       region: region,
       didDetermineState: didDetermineState,
-    }
+    };
 
     ibeacon.startMonitoringForRegion(options);
 
@@ -182,7 +182,7 @@ describe('monitoring', function() {
     var options = {
       region: region,
       didDetermineState: didDetermineState,
-    }
+    };
 
     ibeacon.startMonitoringForRegion(options);
 

@@ -1,3 +1,5 @@
+'use strict';
+
 describe('ibeacon', function() {
 
   afterEach(function() {

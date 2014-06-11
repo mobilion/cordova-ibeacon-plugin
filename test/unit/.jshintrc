@@ -1,0 +1,19 @@
+{
+
+  "extends": "../../.jshintrc",
+
+  "globals": {
+    "describe": false,
+    "xdescribe": false,
+    "expect": false,
+    "it": false,
+    "xit": false,
+    "before": false,
+    "beforeEach": false,
+    "after": false,
+    "afterEach": false,
+    "ibeacon": false,
+    "execCache": false
+  }
+
+}

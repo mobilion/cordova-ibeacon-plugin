@@ -50,25 +50,9 @@
   "unused": true,
 
   // Enforce line length to 80 characters
-  "maxlen": 80,
+  "maxlen": 100,
 
   // Enforce placing 'use strict' at the top function scope
-  "strict": true,
-
-  "globals": {
-    "describe": false,
-    "expect": false,
-    "it": false,
-    "xit": false,
-    "before": false,
-    "beforeEach": false,
-    "after": false,
-    "afterEach": false,
-    "ibeacon": false,
-    "execCache": false,
-    "advertise": false,
-    "clean": false,
-    "killServer": false
-  }
+  "strict": true
 
 }

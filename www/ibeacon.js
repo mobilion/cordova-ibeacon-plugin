@@ -38,7 +38,8 @@ var checkParam = function(object) {
   });
 
   if (!propertyFound) {
-    throw new Error('Missing option. None of the following properties are specified: ' + missingProperties.join(', '));
+    throw new Error('Missing option. None of the following properties are specified: ' +
+      missingProperties.join(', '));
   }
 
 };

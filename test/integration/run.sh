@@ -12,9 +12,9 @@ cd $SCRIPT_DIR
 
 # inject local ip for socket server
 cp -f www/index.html www/index.html.org
-cp -f www/js/index.js www/js/index.js.org
+cp -f www/js/socket.js www/js/socket.js.org
 sed -i '' "s/LOCAL_IP/$LOCAL_IP/g" www/index.html
-sed -i '' "s/LOCAL_IP/$LOCAL_IP/g" www/js/index.js
+sed -i '' "s/LOCAL_IP/$LOCAL_IP/g" www/js/socket.js
 
 # clean up & link plugin
 rm -rf platforms plugins
@@ -31,6 +31,6 @@ node server.js &
 cordova run $PLATFORM
 
 # clean up
-rm www/{index.html,js/index.js}
+rm www/{index.html,js/socket.js}
 mv www/index.html.org www/index.html
-mv www/js/index.js.org www/js/index.js
+mv www/js/socket.js.org www/js/socket.js
