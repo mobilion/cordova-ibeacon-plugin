@@ -20,6 +20,22 @@
 
 startMonitoringForRegion() let's you know whether you see any beacon
 
+### Example
+
+```js
+var region = new ibeacon.Region({
+  identifier: 'my-app',
+  uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2'
+});
+
+startMonitoringForRegion(region, {
+  didDetermineState: function(result) {
+    if (result.state === 'inside') console.log('I see you!')
+    else console.log('Where are you?');
+  };
+});
+```
+
 ### Params: 
 
 * **Object** *options* 

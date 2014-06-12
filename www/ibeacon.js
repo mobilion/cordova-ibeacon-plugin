@@ -50,26 +50,42 @@ var ibeacon = {
 
   Beacon: Beacon,
 
-//  startAdvertising: function(region, onDidStartAdvertising, measuredPower) {
-//
-//    if (measuredPower) {
-//      return callNative('startAdvertising', region, onDidStartAdvertising, null, [measuredPower]);
-//    } else {
-//      return callNative('startAdvertising', region, onDidStartAdvertising);
-//    }
-//
-//  },
-//
-//  stopAdvertising: function(onSuccess) {
-//    callNative('stopAdvertising', null, onSuccess);
-//  },
-//
-//  isAdvertising: function(onSuccess) {
-//    callNative('isAdvertising', null, onSuccess);
-//  },
+  //  startAdvertising: function(region, onDidStartAdvertising, measuredPower) {
+  //
+  //    if (measuredPower) {
+  //      return callNative('startAdvertising', region, onDidStartAdvertising, null, [measuredPower]);
+  //    } else {
+  //      return callNative('startAdvertising', region, onDidStartAdvertising);
+  //    }
+  //
+  //  },
+  //
+  //  stopAdvertising: function(onSuccess) {
+  //    callNative('stopAdvertising', null, onSuccess);
+  //  },
+  //
+  //  isAdvertising: function(onSuccess) {
+  //    callNative('isAdvertising', null, onSuccess);
+  //  },
 
   /**
    * startMonitoringForRegion() let's you know whether you see any beacon
+   *
+   * ### Example
+   *
+   * ```js
+   * var region = new ibeacon.Region({
+   *   identifier: 'my-app',
+   *   uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2'
+   * });
+   *
+   * startMonitoringForRegion(region, {
+   *   didDetermineState: function(result) {
+   *     if (result.state === 'inside') console.log('I see you!')
+   *     else console.log('Where are you?');
+   *   };
+   * });
+   * ```
    *
    * @name startMonitoringForRegion
    * @param {Object} options
