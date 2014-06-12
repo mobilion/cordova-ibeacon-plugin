@@ -56,4 +56,6 @@ ibeacon.stopMonitoringForRegion({
 * Advertising support (currently not supported in Android)
 * Demo application (+ Video tutorial)
 
-## MIT License
+## License
+
+[MIT License](http://opensource.org/licenses/MIT)
