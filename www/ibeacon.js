@@ -50,24 +50,34 @@ var ibeacon = {
 
   Beacon: Beacon,
 
-  startAdvertising: function(region, onDidStartAdvertising, measuredPower) {
+//  startAdvertising: function(region, onDidStartAdvertising, measuredPower) {
+//
+//    if (measuredPower) {
+//      return callNative('startAdvertising', region, onDidStartAdvertising, null, [measuredPower]);
+//    } else {
+//      return callNative('startAdvertising', region, onDidStartAdvertising);
+//    }
+//
+//  },
+//
+//  stopAdvertising: function(onSuccess) {
+//    callNative('stopAdvertising', null, onSuccess);
+//  },
+//
+//  isAdvertising: function(onSuccess) {
+//    callNative('isAdvertising', null, onSuccess);
+//  },
 
-    if (measuredPower) {
-      return callNative('startAdvertising', region, onDidStartAdvertising, null, [measuredPower]);
-    } else {
-      return callNative('startAdvertising', region, onDidStartAdvertising);
-    }
-
-  },
-
-  stopAdvertising: function(onSuccess) {
-    callNative('stopAdvertising', null, onSuccess);
-  },
-
-  isAdvertising: function(onSuccess) {
-    callNative('isAdvertising', null, onSuccess);
-  },
-
+  /**
+   * startMonitoringForRegion() let's you know whether you see any beacon
+   *
+   * @name startMonitoringForRegion
+   * @param {Object} options
+   * @param {Region} options.region Region where to start monitoring
+   * @param {Function} options.didDetermineState Function gets called when state changes
+   * @param {Function} options.didEnter Function gets called when at least one beacon was found
+   * @param {Function} options.didDetermineState Function gets called when no beacon was found
+   */
   startMonitoringForRegion: function(options) {
 
     checkParam(options, 'region');
