@@ -18,9 +18,10 @@
 
 ## startMonitoringForRegion
 
-startMonitoringForRegion() lets you know whether you see any beacon
+startMonitoringForRegion() lets you know whether you see any beacon in a
+given region.
 
-### Example
+### Example:
 
 ```js
 var region = new ibeacon.Region({
@@ -47,9 +48,10 @@ ibeacon.startMonitoringForRegion({
 
 ## stopMonitoringForRegion
 
-stopMonitoringForRegion() stops monitoring in region
+stopMonitoringForRegion() stops monitoring and callbacks of `startMonitoringForRegion`
+for the given region.
 
-### Example
+### Example:
 
 ```js
 var region = new ibeacon.Region({
