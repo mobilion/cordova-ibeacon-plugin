@@ -71,13 +71,6 @@ var ibeacon = {
   /**
    * startMonitoringForRegion() lets you know whether you see any beacon
    *
-   * @name startMonitoringForRegion
-   * @param {Object} options
-   * @param {Region} options.region Region where to start monitoring
-   * @param {Function} options.didDetermineState Function gets called when state changes (optional)
-   * @param {Function} options.didEnter Function gets called when at least one beacon was found (optional)
-   * @param {Function} options.didDetermineState Function gets called when no beacon was found (optional)
-   *
    * ### Example
    *
    * ```js
@@ -94,6 +87,13 @@ var ibeacon = {
    *   }
    * });
    * ```
+   *
+   * @name startMonitoringForRegion
+   * @param {Object} options
+   * @param {Region} options.region Region where to start monitoring
+   * @param {Function} options.didDetermineState Function gets called when state changes (optional)
+   * @param {Function} options.didEnter Function gets called when at least one beacon was found (optional)
+   * @param {Function} options.didDetermineState Function gets called when no beacon was found (optional)
    */
   startMonitoringForRegion: function(options) {
 
@@ -138,10 +138,6 @@ var ibeacon = {
   /**
    * stopMonitoringForRegion() stops monitoring in region
    *
-   * @name stopMonitoringForRegion
-   * @param {Object} options
-   * @param {Region} options.region Region where to stop monitoring
-   *
    * ### Example
    *
    * ```js
@@ -154,6 +150,10 @@ var ibeacon = {
    *   region: region
    * });
    * ```
+   *
+   * @name stopMonitoringForRegion
+   * @param {Object} options
+   * @param {Region} options.region Region where to stop monitoring
    */
   stopMonitoringForRegion: function(options) {
 
