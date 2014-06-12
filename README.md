@@ -11,7 +11,7 @@ $ cordova plugin add https://github.com/schickling/cordova-ibeacon-plugin.git
 
 ## Usage
 
-For full usage information please refer to the [documentation](https://github.com/schickling/cordova-ibeacon-plugin/tree/master/doc).
+For more usage information please refer to the [documentation](https://github.com/schickling/cordova-ibeacon-plugin/tree/master/doc).
 
 #### Monitoring
 
@@ -54,7 +54,6 @@ ibeacon.stopMonitoringForRegion({
 ## Coming soon
 
 * Advertising support (currently not supported in Android)
-* Example application
-* ...
+* Demo application (+ Video tutorial)
 
 ## MIT License
