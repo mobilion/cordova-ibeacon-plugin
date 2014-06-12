@@ -54,7 +54,7 @@ ibeacon.stopMonitoringForRegion({
 ## Coming soon
 
 * Advertising support (currently not supported in Android)
-* Demo application (+ Video tutorial)
+* Demo application (+video tutorial)
 
 ## License
 
