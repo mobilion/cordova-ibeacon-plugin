@@ -69,7 +69,14 @@ var ibeacon = {
   //  },
 
   /**
-   * startMonitoringForRegion() let's you know whether you see any beacon
+   * startMonitoringForRegion() lets you know whether you see any beacon
+   *
+   * @name startMonitoringForRegion
+   * @param {Object} options
+   * @param {Region} options.region Region where to start monitoring
+   * @param {Function} options.didDetermineState Function gets called when state changes (optional)
+   * @param {Function} options.didEnter Function gets called when at least one beacon was found (optional)
+   * @param {Function} options.didDetermineState Function gets called when no beacon was found (optional)
    *
    * ### Example
    *
@@ -79,20 +86,14 @@ var ibeacon = {
    *   uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2'
    * });
    *
-   * startMonitoringForRegion(region, {
+   * ibeacon.startMonitoringForRegion({
+   *   region: region,
    *   didDetermineState: function(result) {
    *     if (result.state === 'inside') console.log('I see you!')
    *     else console.log('Where are you?');
-   *   };
+   *   }
    * });
    * ```
-   *
-   * @name startMonitoringForRegion
-   * @param {Object} options
-   * @param {Region} options.region Region where to start monitoring
-   * @param {Function} options.didDetermineState Function gets called when state changes
-   * @param {Function} options.didEnter Function gets called when at least one beacon was found
-   * @param {Function} options.didDetermineState Function gets called when no beacon was found
    */
   startMonitoringForRegion: function(options) {
 
@@ -134,6 +135,26 @@ var ibeacon = {
 
   },
 
+  /**
+   * stopMonitoringForRegion() stops monitoring in region
+   *
+   * @name stopMonitoringForRegion
+   * @param {Object} options
+   * @param {Region} options.region Region where to stop monitoring
+   *
+   * ### Example
+   *
+   * ```js
+   * var region = new ibeacon.Region({
+   *   identifier: 'my-app',
+   *   uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2'
+   * });
+   *
+   * ibeacon.stopMonitoringForRegion({
+   *   region: region
+   * });
+   * ```
+   */
   stopMonitoringForRegion: function(options) {
 
     checkParam(options, 'region');
