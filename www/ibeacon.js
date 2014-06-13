@@ -171,6 +171,32 @@ var ibeacon = {
 
   },
 
+  /**
+   * startRangingBeaconsInRegion() starts ranging for beacons in the given
+   * region and calls back every second
+   *
+   * ### Example:
+   *
+   * ```js
+   * var region = new ibeacon.Region({
+   *   identifier: 'my-app',
+   *   uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2'
+   * });
+   *
+   * ibeacon.startRangingBeaconsInRegion({
+   *   region: region,
+   *   didDetermineState: function(result) {
+   *     console.log('I see ' + result.beacons.length + ' beacons');
+   *   }
+   * });
+   * ```
+   *
+   * @name startRangingBeaconsInRegion
+   * @param {Object} options
+   * @param {Region} options.region Region where to start ranging
+   * @param {Function} options.didRangeBeacons Function gets called every second
+   * with all found beacons
+   */
   startRangingBeaconsInRegion: function(options) {
 
     checkParam(options, 'region');
@@ -201,6 +227,26 @@ var ibeacon = {
 
   },
 
+  /**
+   * stopRangingBeaconsInRegion() stops ranging and callbacks of `startRangingBeaconsInRegion`
+   *
+   * ### Example:
+   *
+   * ```js
+   * var region = new ibeacon.Region({
+   *   identifier: 'my-app',
+   *   uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2'
+   * });
+   *
+   * ibeacon.stopRangingBeaconsInRegion({
+   *   region: region
+   * });
+   * ```
+   *
+   * @name stopRangingBeaconsInRegion
+   * @param {Object} options
+   * @param {Region} options.region Region where to stop ranging
+   */
   stopRangingBeaconsInRegion: function(options) {
 
     checkParam(options, 'region');

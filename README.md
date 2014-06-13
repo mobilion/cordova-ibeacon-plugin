@@ -49,7 +49,32 @@ ibeacon.stopMonitoringForRegion({
 
 ##### startRangingBeaconsInRegion
 
+```js
+var region = new ibeacon.Region({
+  identifier: 'my-app',
+  uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2'
+});
+
+ibeacon.startRangingBeaconsInRegion({
+  region: region,
+  didDetermineState: function(result) {
+    console.log('I see ' + result.beacons.length + ' beacons');
+  }
+});
+```
+
 ##### stopRangingBeaconsInRegion
+
+```js
+var region = new ibeacon.Region({
+  identifier: 'my-app',
+  uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2'
+});
+
+ibeacon.stopRangingBeaconsInRegion({
+  region: region
+});
+```
 
 ## Coming soon
 
