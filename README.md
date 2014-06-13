@@ -3,6 +3,11 @@ cordova-ibeacon-plugin [![Build Status](https://travis-ci.org/schickling/cordova
 
 Cross-platform (iOS/Android) iBeacon plugin for [Cordova](http://cordova.apache.org/) and [Phonegap](http://phonegap.com/)
 
+## Features
+
+* Platforms: iOS, Android (based on [android-ibeacon-service](https://github.com/RadiusNetworks/android-ibeacon-service) of [Radius Networks](http://developer.radiusnetworks.com/ibeacon/android/))
+* Well tested on real devices (unit/integration tests)
+
 ## Install
 
 ```sh
