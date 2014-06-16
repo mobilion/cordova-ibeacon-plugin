@@ -15,9 +15,10 @@ var loadTests = function() {
 
   [
     'lib/jasmine-2.0.0/boot.js',
-    'spec/01-monitoring.js',
-    'spec/02-ranging.js',
-    'spec/03-kill.js',
+    'spec/01-advertising.js',
+    'spec/02-monitoring.js',
+    'spec/03-ranging.js',
+    'spec/04-kill.js',
   ].forEach(loadScript);
 
   // timeout and window.onload needed to start tests
