@@ -40,6 +40,14 @@ module.exports = {
 
   },
 
+  validatePower: function(power) {
+
+    if (!this._isInteger(power)) {
+      throw new Error('Parameter "power" has to be an integer value.');
+    }
+
+  },
+
   validateIdentifier: function(identifier) {
 
     if (this._isBlank(identifier)) {
