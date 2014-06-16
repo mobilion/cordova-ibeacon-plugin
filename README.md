@@ -88,4 +88,4 @@ ibeacon.stopRangingBeaconsInRegion({
 
 ## License
 
-[MIT License](http://opensource.org/licenses/MIT)
+[Apache License, Version 2.0](http://opensource.org/licenses/Apache-2.0)
