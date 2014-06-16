@@ -5,7 +5,7 @@
 
     <name>ibeacon</name>
     <description>Cross-plattform iBeacon plugin for Cordova/Phonegap</description>
-    <license>MIT</license>
+    <license>Apache 2.0</license>
     <keywords>cordova,ibeacon,bluetooth,ble</keywords>
     <repo>https://github.com/mobilion/cordova-ibeacon-plugin</repo>
 
