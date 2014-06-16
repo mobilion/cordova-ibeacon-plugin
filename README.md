@@ -86,6 +86,10 @@ ibeacon.stopRangingBeaconsInRegion({
 * Advertising support (currently not supported in Android)
 * Demo application (+video tutorial)
 
+## Author
+
+[Johannes Schickling](https://github.com/schickling)
+
 ## License
 
 [Apache License, Version 2.0](http://opensource.org/licenses/Apache-2.0)
