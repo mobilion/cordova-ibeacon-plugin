@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/schickling/cordova-ibeacon-plugin.git"
+    "url": "https://github.com/mobilion/cordova-ibeacon-plugin.git"
   },
   "keywords": [
     "ibeacon",
@@ -23,9 +23,9 @@
   "author": "Johannes Schickling <schickling.j@gmail.com> (https://github.com/schickling)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/schickling/cordova-ibeacon-plugin/issues"
+    "url": "https://github.com/mobilion/cordova-ibeacon-plugin/issues"
   },
-  "homepage": "https://github.com/schickling/cordova-ibeacon-plugin",
+  "homepage": "https://github.com/mobilion/cordova-ibeacon-plugin",
   "devDependencies": {
     "gulp": "^3.7.0",
     "browserify": "^4.1.8",

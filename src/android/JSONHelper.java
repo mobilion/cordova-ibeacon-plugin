@@ -1,4 +1,4 @@
-package me.schickling.ibeacon;
+package eu.mobilion.ibeacon;
 
 import com.radiusnetworks.ibeacon.*;
 

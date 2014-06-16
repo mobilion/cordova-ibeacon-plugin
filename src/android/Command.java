@@ -1,4 +1,4 @@
-package me.schickling.ibeacon;
+package eu.mobilion.ibeacon;
 
 import org.apache.cordova.*;
 import org.json.JSONArray;

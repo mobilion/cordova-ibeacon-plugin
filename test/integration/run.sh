@@ -4,7 +4,7 @@ set -e
 PLATFORM=$1
 SCRIPT_DIR=$( cd $(dirname $0) ; pwd -P )
 PLUGIN_DIR="$SCRIPT_DIR/../.."
-PLUGIN_NAME="me.schickling.ibeacon"
+PLUGIN_NAME="eu.mobilion.ibeacon"
 LOCAL_IP=$( ifconfig en0 | grep 'inet ' | cut -d' ' -f2 )
 
 # change base dir

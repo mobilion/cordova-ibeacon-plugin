@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-    id="me.schickling.ibeacon"
+    id="eu.mobilion.ibeacon"
     version="0.0.0">
 
     <name>ibeacon</name>
     <description>Cross-plattform iBeacon plugin for Cordova/Phonegap</description>
     <license>MIT</license>
     <keywords>cordova,ibeacon,bluetooth,ble</keywords>
-    <repo>https://github.com/schickling/cordova-ibeacon-plugin</repo>
+    <repo>https://github.com/mobilion/cordova-ibeacon-plugin</repo>
 
     <engines>
         <engine name="cordova" version=">=3.1.0" />
@@ -23,7 +23,7 @@
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="IBeaconPlugin" >
-                <param name="android-package" value="me.schickling.ibeacon.IBeaconPlugin" />
+                <param name="android-package" value="eu.mobilion.ibeacon.IBeaconPlugin" />
             </feature>
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest">
@@ -35,9 +35,9 @@
             <service android:name="com.radiusnetworks.ibeacon.IBeaconIntentProcessor" />
         </config-file>
         <source-file src="src/android/libs/AndroidIBeaconLibrary-0.7.7.jar" target-dir="libs" />
-        <source-file src="src/android/IBeaconPlugin.java" target-dir="src/me/schickling/ibeacon" />
-        <source-file src="src/android/JSONHelper.java" target-dir="src/me/schickling/ibeacon" />
-        <source-file src="src/android/Command.java" target-dir="src/me/schickling/ibeacon" />
+        <source-file src="src/android/IBeaconPlugin.java" target-dir="src/me/mobilion/ibeacon" />
+        <source-file src="src/android/JSONHelper.java" target-dir="src/me/mobilion/ibeacon" />
+        <source-file src="src/android/Command.java" target-dir="src/me/mobilion/ibeacon" />
     </platform>
 
     <platform name="ios">

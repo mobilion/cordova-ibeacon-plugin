@@ -1,4 +1,4 @@
-cordova-ibeacon-plugin [![Build Status](https://travis-ci.org/schickling/cordova-ibeacon-plugin.svg?branch=master)](https://travis-ci.org/schickling/cordova-ibeacon-plugin)
+cordova-ibeacon-plugin [![Build Status](https://travis-ci.org/mobilion/cordova-ibeacon-plugin.svg?branch=master)](https://travis-ci.org/mobilion/cordova-ibeacon-plugin)
 ======================
 
 Cross-platform (iOS/Android) iBeacon plugin for [Cordova](http://cordova.apache.org/) and [Phonegap](http://phonegap.com/)
@@ -11,12 +11,12 @@ Cross-platform (iOS/Android) iBeacon plugin for [Cordova](http://cordova.apache.
 ## Install
 
 ```sh
-$ cordova plugin add https://github.com/schickling/cordova-ibeacon-plugin.git
+$ cordova plugin add https://github.com/mobilion/cordova-ibeacon-plugin.git
 ```
 
 ## Usage
 
-For more usage information please refer to the [documentation](https://github.com/schickling/cordova-ibeacon-plugin/tree/master/doc).
+For more usage information please refer to the [documentation](https://github.com/mobilion/cordova-ibeacon-plugin/tree/master/doc).
 
 #### Monitoring
 
