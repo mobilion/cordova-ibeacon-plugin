@@ -4,17 +4,13 @@ var exec = require('cordova/exec');
 var Region = require('./region');
 var Beacon = require('./beacon');
 
-var callNative = function(actionName, region, onSuccess, onFailure, extraArgs) {
+var callNative = function(actionName, regionOrBeacon, onSuccess, onFailure) {
 
   var commandArguments = [];
 
-  if (region) {
-    region.validate();
-    commandArguments.push(region);
-  }
-
-  if (extraArgs instanceof Array) {
-    commandArguments = commandArguments.concat(extraArgs);
+  if (regionOrBeacon) {
+    regionOrBeacon.validate();
+    commandArguments.push(regionOrBeacon);
   }
 
   exec(onSuccess, onFailure, 'IBeaconPlugin', actionName, commandArguments);
@@ -50,23 +46,21 @@ var ibeacon = {
 
   Beacon: Beacon,
 
-  //  startAdvertising: function(region, onDidStartAdvertising, measuredPower) {
-  //
-  //    if (measuredPower) {
-  //      return callNative('startAdvertising', region, onDidStartAdvertising, null, [measuredPower]);
-  //    } else {
-  //      return callNative('startAdvertising', region, onDidStartAdvertising);
-  //    }
-  //
-  //  },
-  //
-  //  stopAdvertising: function(onSuccess) {
-  //    callNative('stopAdvertising', null, onSuccess);
-  //  },
-  //
-  //  isAdvertising: function(onSuccess) {
-  //    callNative('isAdvertising', null, onSuccess);
-  //  },
+  startAdvertising: function(options) {
+
+    checkParam(options, 'beacon');
+
+    callNative('startAdvertising', options.beacon);
+
+  },
+
+  stopAdvertising: function(onSuccess) {
+    callNative('stopAdvertising', null, onSuccess);
+  },
+
+  isAdvertising: function(onSuccess) {
+    callNative('isAdvertising', null, onSuccess);
+  },
 
   /**
    * startMonitoringForRegion() lets you know whether you see any beacon in a
@@ -91,7 +85,7 @@ var ibeacon = {
    *
    * @name startMonitoringForRegion
    * @param {Object} options
-   * @param {Region} options.region Region where to start monitoring
+   * @param {Region|Array} options.region Region(s) where to start monitoring
    * @param {Function} options.didDetermineState Function gets called when state changes (optional)
    * @param {Function} options.didEnter Function gets called when at least one beacon was found (optional)
    * @param {Function} options.didDetermineState Function gets called when no beacon was found (optional)
@@ -155,7 +149,7 @@ var ibeacon = {
    *
    * @name stopMonitoringForRegion
    * @param {Object} options
-   * @param {Region} options.region Region where to stop monitoring
+   * @param {Region|Array} options.region Region(s) where to stop monitoring
    */
   stopMonitoringForRegion: function(options) {
 
@@ -193,7 +187,7 @@ var ibeacon = {
    *
    * @name startRangingBeaconsInRegion
    * @param {Object} options
-   * @param {Region} options.region Region where to start ranging
+   * @param {Region|Array} options.region Region(s) where to start ranging
    * @param {Function} options.didRangeBeacons Function gets called every second
    * with all found beacons
    */
@@ -245,7 +239,7 @@ var ibeacon = {
    *
    * @name stopRangingBeaconsInRegion
    * @param {Object} options
-   * @param {Region} options.region Region where to stop ranging
+   * @param {Region|Array} options.region Region(s) where to stop ranging
    */
   stopRangingBeaconsInRegion: function(options) {
 
