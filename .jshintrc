@@ -49,9 +49,6 @@
   // Warn when variables are defined but never used.
   "unused": true,
 
-  // Enforce line length to 80 characters
-  "maxlen": 100,
-
   // Enforce placing 'use strict' at the top function scope
   "strict": true
 
