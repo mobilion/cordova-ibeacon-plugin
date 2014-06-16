@@ -35,9 +35,9 @@
             <service android:name="com.radiusnetworks.ibeacon.IBeaconIntentProcessor" />
         </config-file>
         <source-file src="src/android/libs/AndroidIBeaconLibrary-0.7.7.jar" target-dir="libs" />
-        <source-file src="src/android/IBeaconPlugin.java" target-dir="src/me/mobilion/ibeacon" />
-        <source-file src="src/android/JSONHelper.java" target-dir="src/me/mobilion/ibeacon" />
-        <source-file src="src/android/Command.java" target-dir="src/me/mobilion/ibeacon" />
+        <source-file src="src/android/IBeaconPlugin.java" target-dir="src/eu/mobilion/ibeacon" />
+        <source-file src="src/android/JSONHelper.java" target-dir="src/eu/mobilion/ibeacon" />
+        <source-file src="src/android/Command.java" target-dir="src/eu/mobilion/ibeacon" />
     </platform>
 
     <platform name="ios">
