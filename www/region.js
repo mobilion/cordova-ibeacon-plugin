@@ -1,22 +1,24 @@
 'use strict';
 
 var helper = require('./helper');
+var defaults = require('./defaults');
 
 var Region = function(region) {
 
-  this.uuid = region.uuid.toLowerCase();
-  this.identifier = region.identifier;
+  this.identifier = region.identifier || defaults.identifier;
+  this.uuid = region.uuid || null;
   this.major = region.major || null;
   this.minor = region.minor || null;
 
   this.validate();
+  this._normalize();
 
 };
 
 Region.prototype.validate = function() {
 
-  helper.validateUuid(this.uuid);
   helper.validateIdentifier(this.identifier);
+  helper.validateUuid(this.uuid);
 
   if (this.major) {
     helper.validateMajor(this.major);
@@ -26,6 +28,10 @@ Region.prototype.validate = function() {
     helper.validateMinor(this.minor);
   }
 
+};
+
+Region.prototype._normalize = function() {
+  this.uuid = this.uuid.toLowerCase();
 };
 
 Region.prototype.equals = function(region) {
