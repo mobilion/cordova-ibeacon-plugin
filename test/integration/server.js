@@ -1,5 +1,6 @@
 var io = require('socket.io')();
 var exec = require('child_process').exec;
+var spawn = require('child_process').spawn;
 
 io.on('connection', function(socket) {
 
@@ -38,28 +39,27 @@ io.on('connection', function(socket) {
 
   socket.on('scan', function(uuid, major, minor) {
 
-    var command = 'ibeacon --scan';
+    var process = spawn('ibeacon', ['--scan']);
 
-    exec(command, {
-      timeout: 7000,
-    }, function(error, stdout, stderr) {
+    process.stdout.on('data', function(data) {
 
-      var lines = stdout.split('\n');
-      var beaconWasFound = false;
+      var line = data.toString();
 
-      for (var i = 0; i < lines.length; ++i) {
+      if (line.indexOf(uuid) > -1 && line.indexOf(major) > -1 && line.indexOf(minor) > -1) {
 
-        var line = lines[i];
-
-        if (line.indexOf(uuid) > -1 && line.indexOf(major) > -1 && line.indexOf(minor) > -1) {
-          beaconWasFound = true;
-        }
+        socket.emit('scan-result', true);
+        process.kill();
 
       }
 
-      socket.emit('scan-result', beaconWasFound);
-
     });
+
+    setTimeout(function() {
+
+      socket.emit('scan-result', false);
+      process.kill();
+
+    }, 10000);
 
   });
 
@@ -69,7 +69,7 @@ io.on('connection', function(socket) {
       childProcess.kill();
     });
 
-  };
+  }
 
 });
 
