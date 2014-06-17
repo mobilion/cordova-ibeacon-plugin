@@ -17,7 +17,7 @@ io.on('connection', function(socket) {
       command += ' --minor ' + minor;
     }
 
-    var childProcess = exec(command, function () {
+    var childProcess = exec(command, function() {
       childProcesses.splice(childProcesses.indexOf(childProcess), 1);
     });
 
@@ -33,6 +33,33 @@ io.on('connection', function(socket) {
 
     killChildProcesses();
     process.exit(0);
+
+  });
+
+  socket.on('scan', function(uuid, major, minor) {
+
+    var command = 'ibeacon --scan';
+
+    exec(command, {
+      timeout: 7000,
+    }, function(error, stdout, stderr) {
+
+      var lines = stdout.split('\n');
+      var beaconWasFound = false;
+
+      for (var i = 0; i < lines.length; ++i) {
+
+        var line = lines[i];
+
+        if (line.indexOf(uuid) > -1 && line.indexOf(major) > -1 && line.indexOf(minor) > -1) {
+          beaconWasFound = true;
+        }
+
+      }
+
+      socket.emit('scan-result', beaconWasFound);
+
+    });
 
   });
 
