@@ -43,7 +43,7 @@ io.on('connection', function(socket) {
 
     process.stdout.on('data', function(data) {
 
-      var line = data.toString();
+      var line = data.toString().toLowerCase();
 
       if (line.indexOf(uuid) > -1 && line.indexOf(major) > -1 && line.indexOf(minor) > -1) {
 
