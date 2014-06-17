@@ -39,7 +39,7 @@ describe('ibeacon', function() {
 
   describe('advertising', function() {
 
-    it('should start advertising for single beacon', function() {
+    it('should run startAdvertising for single beacon', function() {
 
       ibeacon.startAdvertising({
         beacon: beaconA,
@@ -50,7 +50,7 @@ describe('ibeacon', function() {
 
     });
 
-    it('should start advertising for multiple beacons', function() {
+    it('should run startAdvertising for multiple beacons', function() {
 
       ibeacon.startAdvertising({
         beacon: beacons,
@@ -60,27 +60,47 @@ describe('ibeacon', function() {
 
     });
 
-    xit('should stop advertising', function() {
+    it('should run stopAdvertising for single beacon', function() {
 
-      var onSuccess = function() {};
-
-      ibeacon.stopAdvertising(onSuccess);
+      ibeacon.stopAdvertising({
+        beacon: beaconA,
+      });
 
       expect(execCache.length).toBe(1);
       expect(execCache[0].actionName).toBe('stopAdvertising');
-      expect(execCache[0].onSuccess).toBe(onSuccess);
 
     });
 
-    it('should call isAdvertising', function() {
+    it('should run stopAdvertising for multiple beacons', function() {
 
-      var onSuccess = function() {};
+      ibeacon.stopAdvertising({
+        beacon: beacons,
+      });
 
-      ibeacon.isAdvertising(onSuccess);
+      expect(execCache.length).toBe(2);
+
+    });
+
+    it('should run isAdvertising for single beacon', function() {
+
+      ibeacon.isAdvertising({
+        beacon: beaconA,
+        isAdvertising: function() {},
+      });
 
       expect(execCache.length).toBe(1);
       expect(execCache[0].actionName).toBe('isAdvertising');
-      expect(execCache[0].onSuccess).toBe(onSuccess);
+
+    });
+
+    it('should run isAdvertising for multiple beacons', function() {
+
+      ibeacon.isAdvertising({
+        beacon: beacons,
+        isAdvertising: function() {},
+      });
+
+      expect(execCache.length).toBe(2);
 
     });
 
