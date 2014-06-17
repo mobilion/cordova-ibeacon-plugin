@@ -37,9 +37,9 @@ ibeacon.startRangingBeaconsInRegion({
 
 Please refer to the corresponding [documentation page](https://github.com/mobilion/cordova-ibeacon-plugin/tree/master/doc/FAQ.md).
 
-## Coming soon
+## Roadmap
 
-* Advertising support (currently not supported in Android)
+* Advertising support for Android platform
 * Demo application (+video tutorial)
 
 ## Author
