@@ -9,6 +9,7 @@ var concat = require('gulp-concat');
 
 gulp.task('hint', function() {
   return gulp.src([
+    'gulpfile.js',
     'www/*.js',
     'test/unit/spec/*.js',
     'test/integration/www/js/*.js',
