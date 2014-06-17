@@ -47,6 +47,25 @@ var ibeacon = {
 
   Beacon: Beacon,
 
+  /**
+   * identifier is the global default identifier for your application. It 
+   * should be set somewhere in configuration process. Each `Region` or 
+   * `Beacon` can also have an individual identifier.
+   *
+   * ### Example:
+   *
+   * ```js
+   * ibeacon.identifier = 'my-unique-identifier';
+   *
+   * var region = new ibeacon.Region({
+   *   uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2'
+   * });
+   *
+   * console.log(region.identifier); // 'my-unique-identifier'
+   * ```
+   *
+   * @name identifier
+   */
   get identifier() {
     return defaults.identifier;
   },
@@ -56,7 +75,7 @@ var ibeacon = {
   },
 
   /**
-   * startAdvertising() transforms your device into an iBeacon itself
+   * startAdvertising() transforms your device into an iBeacon itself.
    *
    * ### Example:
    *
@@ -64,7 +83,7 @@ var ibeacon = {
    * var beacon = new ibeacon.Beacon({
    *   uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2',
    *   major: 10000,
-   *   minor: 10000,
+   *   minor: 10000
    * });
    *
    * ibeacon.startAdvertising({
