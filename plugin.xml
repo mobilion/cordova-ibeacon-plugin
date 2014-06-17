@@ -19,6 +19,7 @@
     <js-module src="www/region.js" name="region" />
     <js-module src="www/beacon.js" name="beacon" />
     <js-module src="www/helper.js" name="helper" />
+    <js-module src="www/defaults.js" name="defaults" />
 
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
