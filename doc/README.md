@@ -43,7 +43,7 @@ console.log(region.identifier); // 'my-unique-identifier'
 
 ## startAdvertising
 
-`startAdvertising()` transforms your device into an iBeacon itself.
+`startAdvertising()` lets the specified beacon start sending.
 
 ### Example:
 
@@ -63,6 +63,57 @@ ibeacon.startAdvertising({
 
 * **Object** *options* 
 * **Beacon|Array** *options.beacon* Beacon(s) to advertise
+
+## stopAdvertising
+
+`stopAdvertising()` stops the specified beacon from sending.
+
+### Example:
+
+```js
+var beacon = new ibeacon.Beacon({
+  uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2',
+  major: 10000,
+  minor: 10000
+});
+
+ibeacon.stopAdvertising({
+  beacon: beacon
+});
+```
+
+### Params: 
+
+* **Object** *options* 
+* **Beacon|Array** *options.beacon* Beacon(s) which to stop to advertise
+
+## isAdvertising
+
+`isAdvertising()` calls back with the result whether the specified beacon
+is sending or not.
+
+### Example:
+
+```js
+var beacon = new ibeacon.Beacon({
+  uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2',
+  major: 10000,
+  minor: 10000
+});
+
+ibeacon.isAdvertising({
+  beacon: beacon,
+  isAdvertising: function(result) {
+    if (result.isAdvertising) console.log('The beacon is advertising');
+    else console.log('The beacon is not advertising');
+  };
+});
+```
+
+### Params: 
+
+* **Object** *options* 
+* **Beacon|Array** *options.beacon* Beacon(s) which to stop to advertise
 
 ## startMonitoringForRegion
 
