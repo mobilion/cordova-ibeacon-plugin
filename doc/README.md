@@ -25,7 +25,7 @@
 
 ## identifier
 
-identifier is the global default identifier for your application. It 
+`identifier` is the global default identifier for your application. It 
 should be set somewhere in configuration process. Each `Region` or 
 `Beacon` can also have an individual identifier.
 
@@ -43,7 +43,7 @@ console.log(region.identifier); // 'my-unique-identifier'
 
 ## startAdvertising
 
-startAdvertising() transforms your device into an iBeacon itself.
+`startAdvertising()` transforms your device into an iBeacon itself.
 
 ### Example:
 
@@ -66,7 +66,7 @@ ibeacon.startAdvertising({
 
 ## startMonitoringForRegion
 
-startMonitoringForRegion() lets you know whether you see any beacon in a
+`startMonitoringForRegion()` lets you know whether you see any beacon in a
 given region.
 
 ### Example:
@@ -95,7 +95,7 @@ ibeacon.startMonitoringForRegion({
 
 ## stopMonitoringForRegion
 
-stopMonitoringForRegion() stops monitoring and callbacks of `startMonitoringForRegion`
+`stopMonitoringForRegion()` stops monitoring and callbacks of `startMonitoringForRegion`
 for the given region.
 
 ### Example:
@@ -117,7 +117,7 @@ ibeacon.stopMonitoringForRegion({
 
 ## startRangingBeaconsInRegion
 
-startRangingBeaconsInRegion() starts ranging for beacons in the given
+`startRangingBeaconsInRegion()` starts ranging for beacons in the given
 region and calls back every second
 
 ### Example:
@@ -143,7 +143,7 @@ ibeacon.startRangingBeaconsInRegion({
 
 ## stopRangingBeaconsInRegion
 
-stopRangingBeaconsInRegion() stops ranging and callbacks of `startRangingBeaconsInRegion`
+`stopRangingBeaconsInRegion()` stops ranging and callbacks of `startRangingBeaconsInRegion`
 
 ### Example:
 

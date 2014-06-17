@@ -48,7 +48,7 @@ var ibeacon = {
   Beacon: Beacon,
 
   /**
-   * identifier is the global default identifier for your application. It 
+   * `identifier` is the global default identifier for your application. It 
    * should be set somewhere in configuration process. Each `Region` or 
    * `Beacon` can also have an individual identifier.
    *
@@ -75,7 +75,7 @@ var ibeacon = {
   },
 
   /**
-   * startAdvertising() transforms your device into an iBeacon itself.
+   * `startAdvertising()` transforms your device into an iBeacon itself.
    *
    * ### Example:
    *
@@ -118,7 +118,7 @@ var ibeacon = {
   },
 
   /**
-   * startMonitoringForRegion() lets you know whether you see any beacon in a
+   * `startMonitoringForRegion()` lets you know whether you see any beacon in a
    * given region.
    *
    * ### Example:
@@ -185,7 +185,7 @@ var ibeacon = {
   },
 
   /**
-   * stopMonitoringForRegion() stops monitoring and callbacks of `startMonitoringForRegion`
+   * `stopMonitoringForRegion()` stops monitoring and callbacks of `startMonitoringForRegion`
    * for the given region.
    *
    * ### Example:
@@ -219,7 +219,7 @@ var ibeacon = {
   },
 
   /**
-   * startRangingBeaconsInRegion() starts ranging for beacons in the given
+   * `startRangingBeaconsInRegion()` starts ranging for beacons in the given
    * region and calls back every second
    *
    * ### Example:
@@ -274,7 +274,7 @@ var ibeacon = {
   },
 
   /**
-   * stopRangingBeaconsInRegion() stops ranging and callbacks of `startRangingBeaconsInRegion`
+   * `stopRangingBeaconsInRegion()` stops ranging and callbacks of `startRangingBeaconsInRegion`
    *
    * ### Example:
    *
