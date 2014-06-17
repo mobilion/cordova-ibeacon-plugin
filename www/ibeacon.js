@@ -1,6 +1,7 @@
 'use strict';
 
 var exec = require('cordova/exec');
+var defaults = require('./defaults');
 var Region = require('./region');
 var Beacon = require('./beacon');
 
@@ -45,6 +46,14 @@ var ibeacon = {
   Region: Region,
 
   Beacon: Beacon,
+
+  get identifier() {
+    return defaults.identifier;
+  },
+
+  set identifier(identifier) {
+    defaults.identifier = identifier;
+  },
 
   startAdvertising: function(options) {
 
