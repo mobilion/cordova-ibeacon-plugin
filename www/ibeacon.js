@@ -55,11 +55,38 @@ var ibeacon = {
     defaults.identifier = identifier;
   },
 
+  /**
+   * startAdvertising() transforms your device into an iBeacon itself
+   *
+   * ### Example:
+   *
+   * ```js
+   * var beacon = new ibeacon.Beacon({
+   *   uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2',
+   *   major: 10000,
+   *   minor: 10000,
+   * });
+   *
+   * ibeacon.startAdvertising({
+   *   beacon: beacon
+   * });
+   * ```
+   *
+   * @name startAdvertising
+   * @param {Object} options
+   * @param {Beacon|Array} options.beacon Beacon(s) to advertise
+   */
   startAdvertising: function(options) {
 
     checkParam(options, 'beacon');
 
-    callNative('startAdvertising', options.beacon);
+    if (!(options.beacon instanceof Array)) {
+      options.beacon = [options.beacon];
+    }
+
+    for (var i = 0; i < options.beacon.length; i++) {
+      callNative('startAdvertising', options.beacon[i]);
+    }
 
   },
 
@@ -79,7 +106,6 @@ var ibeacon = {
    *
    * ```js
    * var region = new ibeacon.Region({
-   *   identifier: 'my-app',
    *   uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2'
    * });
    *
@@ -147,7 +173,6 @@ var ibeacon = {
    *
    * ```js
    * var region = new ibeacon.Region({
-   *   identifier: 'my-app',
    *   uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2'
    * });
    *
@@ -182,7 +207,6 @@ var ibeacon = {
    *
    * ```js
    * var region = new ibeacon.Region({
-   *   identifier: 'my-app',
    *   uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2'
    * });
    *
@@ -237,7 +261,6 @@ var ibeacon = {
    *
    * ```js
    * var region = new ibeacon.Region({
-   *   identifier: 'my-app',
    *   uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2'
    * });
    *
