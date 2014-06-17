@@ -9,6 +9,7 @@ describe('beacon', function() {
       uuid: 'C53AD517-0815-410B-B124-68FFDFBFE0B3',
       major: 12345,
       minor: 67890,
+      power: -60,
     });
 
   });
