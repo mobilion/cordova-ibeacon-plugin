@@ -13,3 +13,11 @@ window.clean = function() {
 window.killServer = function() {
   socket.emit('kill');
 };
+
+window.scan = function(uuid, major, minor, callback) {
+
+  socket.on('scan-result', callback);
+
+  socket.emit('scan', uuid, major, minor);
+
+};
