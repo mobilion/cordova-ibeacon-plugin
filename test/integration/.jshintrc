@@ -17,6 +17,7 @@
     "ibeacon": false,
     "advertise": false,
     "clean": false,
+    "scan": false,
     "killServer": false,
     "uuid": false
   }
