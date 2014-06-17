@@ -75,7 +75,7 @@ var ibeacon = {
   },
 
   /**
-   * `startAdvertising()` transforms your device into an iBeacon itself.
+   * `startAdvertising()` lets the specified beacon start sending.
    *
    * ### Example:
    *
@@ -109,12 +109,80 @@ var ibeacon = {
 
   },
 
-  stopAdvertising: function(onSuccess) {
-    callNative('stopAdvertising', null, onSuccess);
+  /**
+   * `stopAdvertising()` stops the specified beacon from sending.
+   *
+   * ### Example:
+   *
+   * ```js
+   * var beacon = new ibeacon.Beacon({
+   *   uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2',
+   *   major: 10000,
+   *   minor: 10000
+   * });
+   *
+   * ibeacon.stopAdvertising({
+   *   beacon: beacon
+   * });
+   * ```
+   *
+   * @name stopAdvertising
+   * @param {Object} options
+   * @param {Beacon|Array} options.beacon Beacon(s) which to stop to advertise
+   */
+  stopAdvertising: function(options) {
+
+    checkParam(options, 'beacon');
+
+    if (!(options.beacon instanceof Array)) {
+      options.beacon = [options.beacon];
+    }
+
+    for (var i = 0; i < options.beacon.length; i++) {
+      callNative('stopAdvertising', options.beacon[i]);
+    }
+
   },
 
-  isAdvertising: function(onSuccess) {
-    callNative('isAdvertising', null, onSuccess);
+  /**
+   * `isAdvertising()` calls back with the result whether the specified beacon
+   * is sending or not.
+   *
+   * ### Example:
+   *
+   * ```js
+   * var beacon = new ibeacon.Beacon({
+   *   uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2',
+   *   major: 10000,
+   *   minor: 10000
+   * });
+   *
+   * ibeacon.isAdvertising({
+   *   beacon: beacon,
+   *   isAdvertising: function(result) {
+   *     if (result.isAdvertising) console.log('The beacon is advertising');
+   *     else console.log('The beacon is not advertising');
+   *   };
+   * });
+   * ```
+   *
+   * @name isAdvertising
+   * @param {Object} options
+   * @param {Beacon|Array} options.beacon Beacon(s) which to stop to advertise
+   */
+  isAdvertising: function(options) {
+
+    checkParam(options, 'beacon');
+    checkParam(options, 'isAdvertising');
+
+    if (!(options.beacon instanceof Array)) {
+      options.beacon = [options.beacon];
+    }
+
+    for (var i = 0; i < options.beacon.length; i++) {
+      callNative('isAdvertising', options.beacon[i]);
+    }
+
   },
 
   /**
