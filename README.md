@@ -81,6 +81,10 @@ ibeacon.stopRangingBeaconsInRegion({
 });
 ```
 
+## FAQ
+
+Please refer to the corresponding [documentation page](https://github.com/mobilion/cordova-ibeacon-plugin/tree/master/doc/FAQ.md).
+
 ## Coming soon
 
 * Advertising support (currently not supported in Android)
