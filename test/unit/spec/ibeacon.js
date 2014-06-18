@@ -106,56 +106,49 @@ describe('ibeacon', function() {
 
   });
 
-  xdescribe('monitoring', function() {
+  describe('monitoring', function() {
 
-    it('should start monitoring beacons for single region', function() {
+    it('should run startMonitoringForRegion for single region', function() {
 
-      var didDetermineStateCallback = function() {};
-
-      ibeacon.startMonitoringForRegion(regionA, didDetermineStateCallback);
+      ibeacon.startMonitoringForRegion({
+        region: regionA,
+        didDetermineState: function() {},
+      });
 
       expect(execCache.length).toBe(1);
       expect(execCache[0].actionName).toBe('startMonitoringForRegion');
-      expect(execCache[0].onSuccess).toBe(didDetermineStateCallback);
-      expect(execCache[0].commandArguments[0]).toBe(regionA);
 
     });
 
-    it('should start monitoring beacons for multiple regions', function() {
+    it('should run startMonitoringForRegion for multiple regions', function() {
 
-      var didDetermineStateCallback = function() {};
-
-      ibeacon.startMonitoringForRegion(regions, didDetermineStateCallback);
+      ibeacon.startMonitoringForRegion({
+        region: regions,
+        didDetermineState: function() {},
+      });
 
       expect(execCache.length).toBe(2);
-      expect(execCache[0].actionName).toBe('startMonitoringForRegion');
-      expect(execCache[0].onSuccess).toBe(didDetermineStateCallback);
-      expect(execCache[0].commandArguments[0]).toBe(regionA);
-      expect(execCache[1].actionName).toBe('startMonitoringForRegion');
-      expect(execCache[1].onSuccess).toBe(didDetermineStateCallback);
-      expect(execCache[1].commandArguments[0]).toBe(regionB);
 
     });
 
-    it('should stop monitoring beacons for single region', function() {
+    it('should run stopMonitoringForRegion for single region', function() {
 
-      ibeacon.stopMonitoringForRegion(regionA);
+      ibeacon.stopMonitoringForRegion({
+        region: regionA,
+      });
 
       expect(execCache.length).toBe(1);
       expect(execCache[0].actionName).toBe('stopMonitoringForRegion');
-      expect(execCache[0].commandArguments[0]).toBe(regionA);
 
     });
 
-    it('should stop monitoring beacons for single region', function() {
+    it('should run stopMonitoringForRegion for multiple regions', function() {
 
-      ibeacon.stopMonitoringForRegion(regions);
+      ibeacon.stopMonitoringForRegion({
+        region: regions,
+      });
 
       expect(execCache.length).toBe(2);
-      expect(execCache[0].actionName).toBe('stopMonitoringForRegion');
-      expect(execCache[0].commandArguments[0]).toBe(regionA);
-      expect(execCache[1].actionName).toBe('stopMonitoringForRegion');
-      expect(execCache[1].commandArguments[0]).toBe(regionB);
 
     });
 
