@@ -4,9 +4,11 @@ var spawn = require('child_process').spawn;
 
 io.on('connection', function(socket) {
 
-  var childProcesses = [];
+  var currentAdvertiseProcess;
 
   socket.on('advertise', function(uuid, major, minor) {
+
+    killCurrentAdvertiseProcess();
 
     var command = 'ibeacon --broadcast --uuid ' + uuid;
 
@@ -18,21 +20,17 @@ io.on('connection', function(socket) {
       command += ' --minor ' + minor;
     }
 
-    var childProcess = exec(command, function() {
-      childProcesses.splice(childProcesses.indexOf(childProcess), 1);
-    });
-
-    childProcesses.push(childProcess);
+    currentAdvertiseProcess = exec(command);
 
   });
 
   socket.on('clean', function() {
-    killChildProcesses();
+    killCurrentAdvertiseProcess();
   });
 
   socket.on('kill', function() {
 
-    killChildProcesses();
+    killCurrentAdvertiseProcess();
     process.exit(0);
 
   });
@@ -63,11 +61,13 @@ io.on('connection', function(socket) {
 
   });
 
-  function killChildProcesses() {
+  function killCurrentAdvertiseProcess() {
 
-    childProcesses.forEach(function(childProcess) {
-      childProcess.kill();
-    });
+    if (currentAdvertiseProcess) {
+      currentAdvertiseProcess.kill();
+    }
+
+    currentAdvertiseProcess = null;
 
   }
 

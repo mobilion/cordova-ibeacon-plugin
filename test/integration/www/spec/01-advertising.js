@@ -25,8 +25,11 @@ describe('advertising', function() {
     ibeacon.startAdvertising(options);
 
     scan(beaconA.uuid, beaconA.major, beaconA.minor, function(beaconWasFound) {
-      
+
       expect(beaconWasFound).toBe(true);
+
+      ibeacon.stopAdvertising(options);
+
       done();
 
     });
