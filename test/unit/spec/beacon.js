@@ -67,7 +67,7 @@ describe('beacon', function() {
     expect(createRegion).toThrow(new Error('Parameter "minor" has to be an integer value.'));
 
   });
-  
+
   it('should throw an error because of wrong power', function() {
 
     var createRegion = function() {
@@ -80,6 +80,65 @@ describe('beacon', function() {
     };
 
     expect(createRegion).toThrow(new Error('Parameter "power" has to be an integer value.'));
+
+  });
+
+  it('should create a new beacon with immediate proximity', function() {
+
+    new ibeacon.Beacon({
+      uuid: 'C53AD517-0815-410B-B124-68FFDFBFE0B3',
+      major: 67890,
+      minor: 12345,
+      proximity: 'immediate'
+    });
+
+  });
+
+  it('should create a new beacon with near proximity', function() {
+
+    new ibeacon.Beacon({
+      uuid: 'C53AD517-0815-410B-B124-68FFDFBFE0B3',
+      major: 67890,
+      minor: 12345,
+      proximity: 'near'
+    });
+
+  });
+
+  it('should create a new beacon with far proximity', function() {
+
+    new ibeacon.Beacon({
+      uuid: 'C53AD517-0815-410B-B124-68FFDFBFE0B3',
+      major: 67890,
+      minor: 12345,
+      proximity: 'far'
+    });
+
+  });
+
+  it('should create a new beacon with unknown proximity', function() {
+
+    new ibeacon.Beacon({
+      uuid: 'C53AD517-0815-410B-B124-68FFDFBFE0B3',
+      major: 67890,
+      minor: 12345,
+      proximity: 'unknown'
+    });
+
+  });
+
+  it('should throw an error because of wrong proximity', function() {
+
+    var createRegion = function() {
+      new ibeacon.Beacon({
+        uuid: 'C53AD517-0815-410B-B124-68FFDFBFE0B3',
+        major: 67890,
+        minor: 12345,
+        proximity: 'wrong'
+      });
+    };
+
+    expect(createRegion).toThrow(new Error('Parameter "proximity" has to be a valid string.'));
 
   });
 

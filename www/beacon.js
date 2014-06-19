@@ -26,6 +26,10 @@ Beacon.prototype.validate = function() {
     helper.validatePower(this.power);
   }
 
+  if (this.proximity) {
+    helper.validateProximity(this.proximity);
+  }
+
 };
 
 module.exports = Beacon;

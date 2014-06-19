@@ -56,4 +56,14 @@ module.exports = {
 
   },
 
+  validateProximity: function(proximity) {
+
+    var validValues = ['immediate', 'near', 'far', 'unknown'];
+
+    if (validValues.indexOf(proximity) === -1) {
+      throw new Error('Parameter "proximity" has to be a valid string.');
+    }
+
+  },
+
 };
