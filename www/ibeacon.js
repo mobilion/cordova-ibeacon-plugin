@@ -48,8 +48,8 @@ var ibeacon = {
   Beacon: Beacon,
 
   /**
-   * `identifier` is the global default identifier for your application. It 
-   * should be set somewhere in configuration process. Each `Region` or 
+   * `identifier` is the global default identifier for your application. It
+   * should be set somewhere in configuration process. Each `Region` or
    * `Beacon` can also have an individual identifier.
    *
    * ### Example:
@@ -299,7 +299,7 @@ var ibeacon = {
    *
    * ibeacon.startRangingBeaconsInRegion({
    *   region: region,
-   *   didDetermineState: function(result) {
+   *   didRangeBeacons: function(result) {
    *     console.log('I see ' + result.beacons.length + ' beacons');
    *   }
    * });
