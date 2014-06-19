@@ -343,15 +343,13 @@
 - (NSString *)nameOfProximity:(CLProximity) proximity {
     switch (proximity) {
         case CLProximityNear:
-            return @"CLProximityNear";
+            return @"near";
         case CLProximityFar:
-            return @"CLProximityFar";
+            return @"far";
         case CLProximityImmediate:
-            return @"CLProximityImmediate";
-        case CLProximityUnknown:
-            return @"CLProximityUnknown";
+            return @"immediate";
         default:
-            return @"ErrorProximityValueUnknown";
+            return @"unknown";
     }
 }
 
