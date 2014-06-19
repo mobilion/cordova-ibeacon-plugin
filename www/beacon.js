@@ -6,8 +6,8 @@ var helper = require('./helper');
 var Beacon = function(beacon) {
 
   this.power = beacon.power || null;
-  this.rssi = null;
-  this.proximity = null;
+  this.rssi = beacon.rssi || null;
+  this.proximity = beacon.proximity || null;
 
   Region.apply(this, arguments);
 
