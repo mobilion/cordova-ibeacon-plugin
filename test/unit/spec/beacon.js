@@ -142,4 +142,18 @@ describe('beacon', function() {
 
   });
 
+  it('should set isAdvertising to false as default', function() {
+
+    var beacon = new ibeacon.Beacon({
+      identifier: 'my-identifier',
+      uuid: 'C53AD517-0815-410B-B124-68FFDFBFE0B3',
+      major: 12345,
+      minor: 67890,
+      power: -60,
+    });
+
+    expect(beacon.isAdvertising).toBe(false);
+
+  });
+
 });
