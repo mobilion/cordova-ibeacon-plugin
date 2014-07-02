@@ -104,7 +104,11 @@ var ibeacon = {
     }
 
     for (var i = 0; i < options.beacon.length; i++) {
+
+      options.beacon[i].isAdvertising = true;
+
       callNative('startAdvertising', options.beacon[i]);
+
     }
 
   },
@@ -139,7 +143,11 @@ var ibeacon = {
     }
 
     for (var i = 0; i < options.beacon.length; i++) {
+
+      options.beacon[i].isAdvertising = false;
+
       callNative('stopAdvertising', options.beacon[i]);
+
     }
 
   },
