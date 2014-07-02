@@ -2,6 +2,8 @@
 
 describe('ranging', function() {
 
+  this.timeout(60000);
+
   var testUuid = uuid.v4();
 
   var region = new ibeacon.Region({
@@ -48,7 +50,13 @@ describe('ranging', function() {
 
   });
 
-  afterEach(clean);
+  afterEach(function(done) {
+
+    clean();
+
+    _.delay(done, 1000);
+
+  });
 
   it('should range one beacon', function(done) {
 

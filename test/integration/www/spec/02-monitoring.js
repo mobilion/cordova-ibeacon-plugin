@@ -2,6 +2,8 @@
 
 describe('monitoring', function() {
 
+  this.timeout(60000);
+
   var region = new ibeacon.Region({
     identifier: 'monitoring-test',
     uuid: uuid.v4(),
@@ -15,7 +17,7 @@ describe('monitoring', function() {
 
   });
 
-  afterEach(function() {
+  afterEach(function(done) {
 
     ibeacon.stopMonitoringForRegion({
       region: region
@@ -23,6 +25,8 @@ describe('monitoring', function() {
     });
 
     clean();
+
+    _.delay(done, 1000);
 
   });
 

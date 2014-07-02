@@ -2,6 +2,12 @@
 
 describe('advertising', function() {
 
+  this.timeout(60000);
+
+  afterEach(function(done) {
+    _.delay(done, 1000);
+  });
+
   var testUuid = uuid.v4();
 
   var beaconA = new ibeacon.Beacon({
@@ -18,7 +24,6 @@ describe('advertising', function() {
 
   it('should advertise one beacon', function(done) {
 
-  console.log('a');
     var options = {
       beacon: beaconA,
     };
