@@ -12,13 +12,14 @@
     "beforeEach": false,
     "after": false,
     "afterEach": false,
-    "jasmine": false,
     "io": false,
     "ibeacon": false,
     "advertise": false,
     "clean": false,
     "scan": false,
     "killServer": false,
+    "_": false,
+    "mocha": false,
     "uuid": false
   }
 
