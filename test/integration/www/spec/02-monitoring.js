@@ -34,8 +34,8 @@ describe('monitoring', function() {
 
       if (tolerance-- > 0 && result.state !== 'inside') return;
 
-      expect(result.state).toBe('inside');
-      expect(region.equals(result.region)).toBe(true);
+      expect(result.state).to.be('inside');
+      expect(region.equals(result.region)).to.be(true);
 
       done();
 
@@ -56,7 +56,7 @@ describe('monitoring', function() {
 
     var didEnter = function(result) {
 
-      expect(region.equals(result.region)).toBe(true);
+      expect(region.equals(result.region)).to.be(true);
 
       done();
 
@@ -77,8 +77,8 @@ describe('monitoring', function() {
 
       if (tolerance-- > 0 && result.state !== 'outside') return;
 
-      expect(result.state).toBe('outside');
-      expect(region.equals(result.region)).toBe(true);
+      expect(result.state).to.be('outside');
+      expect(region.equals(result.region)).to.be(true);
 
       done();
 
@@ -97,7 +97,7 @@ describe('monitoring', function() {
 
     var didExit = function(result) {
 
-      expect(region.equals(result.region)).toBe(true);
+      expect(region.equals(result.region)).to.be(true);
 
       done();
 
@@ -124,8 +124,8 @@ describe('monitoring', function() {
 
         if (tolerance-- > 0 && result.state !== 'inside') return;
 
-        expect(result.state).toBe('inside');
-        expect(region.equals(result.region)).toBe(true);
+        expect(result.state).to.be('inside');
+        expect(region.equals(result.region)).to.be(true);
 
         clean();
 
@@ -133,8 +133,8 @@ describe('monitoring', function() {
 
       } else {
 
-        expect(result.state).toBe('outside');
-        expect(region.equals(result.region)).toBe(true);
+        expect(result.state).to.be('outside');
+        expect(region.equals(result.region)).to.be(true);
 
         done();
 
@@ -161,8 +161,8 @@ describe('monitoring', function() {
 
         if (tolerance-- > 0 && result.state !== 'outside') return;
 
-        expect(result.state).toBe('outside');
-        expect(region.equals(result.region)).toBe(true);
+        expect(result.state).to.be('outside');
+        expect(region.equals(result.region)).to.be(true);
 
         advertise(region.uuid);
 
@@ -170,8 +170,8 @@ describe('monitoring', function() {
 
       } else {
 
-        expect(result.state).toBe('inside');
-        expect(region.equals(result.region)).toBe(true);
+        expect(result.state).to.be('inside');
+        expect(region.equals(result.region)).to.be(true);
 
         done();
 

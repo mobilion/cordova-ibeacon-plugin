@@ -58,9 +58,9 @@ describe('ranging', function() {
 
       if (tolerance-- > 0 && result.beacons.length !== 1) return;
 
-      expect(result.beacons.length).toBe(1);
-      expect(beaconA.equals(result.beacons[0])).toBe(true);
-      expect(regionWithMajorAndMinor.equals(result.region)).toBe(true);
+      expect(result.beacons.length).to.be(1);
+      expect(beaconA.equals(result.beacons[0])).to.be(true);
+      expect(regionWithMajorAndMinor.equals(result.region)).to.be(true);
 
       ibeacon.stopRangingBeaconsInRegion({
         region: regionWithMajorAndMinor
@@ -88,8 +88,8 @@ describe('ranging', function() {
 
       if (tolerance-- > 0 && result.beacons.length !== 2) return;
 
-      expect(result.beacons.length).toBe(2);
-      expect(regionWithMajor.equals(result.region)).toBe(true);
+      expect(result.beacons.length).to.be(2);
+      expect(regionWithMajor.equals(result.region)).to.be(true);
 
       ibeacon.stopRangingBeaconsInRegion({
         region: regionWithMajor
@@ -118,8 +118,8 @@ describe('ranging', function() {
 
       if (tolerance-- > 0 && result.beacons.length !== 3) return;
 
-      expect(result.beacons.length).toBe(3);
-      expect(region.equals(result.region)).toBe(true);
+      expect(result.beacons.length).to.be(3);
+      expect(region.equals(result.region)).to.be(true);
 
       ibeacon.stopRangingBeaconsInRegion({
         region: region

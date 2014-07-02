@@ -18,6 +18,7 @@ describe('advertising', function() {
 
   it('should advertise one beacon', function(done) {
 
+  console.log('a');
     var options = {
       beacon: beaconA,
     };
@@ -26,7 +27,7 @@ describe('advertising', function() {
 
     scan(beaconA.uuid, beaconA.major, beaconA.minor, function(beaconWasFound) {
 
-      expect(beaconWasFound).toBe(true);
+      expect(beaconWasFound).to.be(true);
 
       ibeacon.stopAdvertising(options);
 
