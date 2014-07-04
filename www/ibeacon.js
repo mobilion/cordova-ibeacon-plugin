@@ -104,11 +104,7 @@ var ibeacon = {
     }
 
     for (var i = 0; i < options.beacon.length; i++) {
-
-      options.beacon[i].isAdvertising = true;
-
       callNative('startAdvertising', options.beacon[i]);
-
     }
 
   },

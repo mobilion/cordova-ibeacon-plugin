@@ -8,7 +8,6 @@ var Beacon = function(beacon) {
   this.power = beacon.power || null;
   this.rssi = beacon.rssi || null;
   this.proximity = beacon.proximity || null;
-  this.isAdvertising = false;
 
   Region.apply(this, arguments);
 
