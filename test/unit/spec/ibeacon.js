@@ -60,24 +60,12 @@ describe('ibeacon', function() {
 
     });
 
-    it('should run stopAdvertising for single beacon', function() {
+    it('should run stopAdvertising', function() {
 
-      ibeacon.stopAdvertising({
-        beacon: beaconA,
-      });
+      ibeacon.stopAdvertising();
 
       expect(execCache.length).toBe(1);
       expect(execCache[0].actionName).toBe('stopAdvertising');
-
-    });
-
-    it('should run stopAdvertising for multiple beacons', function() {
-
-      ibeacon.stopAdvertising({
-        beacon: beacons,
-      });
-
-      expect(execCache.length).toBe(2);
 
     });
 

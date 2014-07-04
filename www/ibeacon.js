@@ -114,41 +114,20 @@ var ibeacon = {
   },
 
   /**
-   * `stopAdvertising()` stops the specified beacon from sending.
+   * `stopAdvertising()` stops the signal transmission of the current
+   * advertised beacon.
    *
    * ### Example:
    *
    * ```js
-   * var beacon = new ibeacon.Beacon({
-   *   uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2',
-   *   major: 10000,
-   *   minor: 10000
-   * });
-   *
-   * ibeacon.stopAdvertising({
-   *   beacon: beacon
-   * });
+   * ibeacon.stopAdvertising();
    * ```
    *
    * @name stopAdvertising
-   * @param {Object} options
-   * @param {Beacon|Array} options.beacon Beacon(s) which to stop to advertise
    */
-  stopAdvertising: function(options) {
+  stopAdvertising: function() {
 
-    checkParam(options, 'beacon');
-
-    if (!(options.beacon instanceof Array)) {
-      options.beacon = [options.beacon];
-    }
-
-    for (var i = 0; i < options.beacon.length; i++) {
-
-      options.beacon[i].isAdvertising = false;
-
-      callNative('stopAdvertising', options.beacon[i]);
-
-    }
+    callNative('stopAdvertising');
 
   },
 
