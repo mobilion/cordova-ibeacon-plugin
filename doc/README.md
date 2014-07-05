@@ -25,8 +25,8 @@
 
 ## identifier
 
-`identifier` is the global default identifier for your application. It 
-should be set somewhere in configuration process. Each `Region` or 
+`identifier` is the global default identifier for your application. It
+should be set somewhere in configuration process. Each `Region` or
 `Beacon` can also have an individual identifier.
 
 ### Example:
@@ -66,46 +66,27 @@ ibeacon.startAdvertising({
 
 ## stopAdvertising
 
-`stopAdvertising()` stops the specified beacon from sending.
+`stopAdvertising()` stops the signal transmission of the current
+advertised beacon.
 
 ### Example:
 
 ```js
-var beacon = new ibeacon.Beacon({
-  uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2',
-  major: 10000,
-  minor: 10000
-});
-
-ibeacon.stopAdvertising({
-  beacon: beacon
-});
+ibeacon.stopAdvertising();
 ```
-
-### Params: 
-
-* **Object** *options* 
-* **Beacon|Array** *options.beacon* Beacon(s) which to stop to advertise
 
 ## isAdvertising
 
-`isAdvertising()` calls back with the result whether the specified beacon
-is sending or not.
+`isAdvertising()` calls back with the result whether the device is
+advertising or not.
 
 ### Example:
 
 ```js
-var beacon = new ibeacon.Beacon({
-  uuid: 'CCE0847C-66CA-45F0-888F-89DD51EE38D2',
-  major: 10000,
-  minor: 10000
-});
-
 ibeacon.isAdvertising({
-  beacon: beacon,
   isAdvertising: function(result) {
-    if (result.isAdvertising) console.log('The beacon is advertising');
-    else console.log('The beacon is not advertising');
+    if (result.isAdvertising) console.log('I am advertising');
+    else console.log('I am not advertising');
   };
 });
 ```
@@ -113,7 +94,7 @@ ibeacon.isAdvertising({
 ### Params: 
 
 * **Object** *options* 
-* **Beacon|Array** *options.beacon* Beacon(s) which to stop to advertise
+* **Function** *options.isAdvertising* Function gets called with the
 
 ## startMonitoringForRegion
 
@@ -180,7 +161,7 @@ var region = new ibeacon.Region({
 
 ibeacon.startRangingBeaconsInRegion({
   region: region,
-  didDetermineState: function(result) {
+  didRangeBeacons: function(result) {
     console.log('I see ' + result.beacons.length + ' beacons');
   }
 });
