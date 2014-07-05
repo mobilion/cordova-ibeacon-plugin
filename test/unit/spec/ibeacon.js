@@ -69,26 +69,14 @@ describe('ibeacon', function() {
 
     });
 
-    it('should run isAdvertising for single beacon', function() {
+    it('should run isAdvertising', function() {
 
       ibeacon.isAdvertising({
-        beacon: beaconA,
         isAdvertising: function() {},
       });
 
       expect(execCache.length).toBe(1);
       expect(execCache[0].actionName).toBe('isAdvertising');
-
-    });
-
-    it('should run isAdvertising for multiple beacons', function() {
-
-      ibeacon.isAdvertising({
-        beacon: beacons,
-        isAdvertising: function() {},
-      });
-
-      expect(execCache.length).toBe(2);
 
     });
 
