@@ -66,4 +66,27 @@ describe('region', function() {
 
   });
 
+  it('should calculate a hash for full region', function() {
+
+    var region = new ibeacon.Region({
+      identifier: 'my-identifier',
+      uuid: 'C53AD517-0815-410B-B124-68FFDFBFE0B3',
+      major: 12345,
+      minor: 67890,
+    });
+
+    expect(region.hash()).toBe('1351029138');
+
+  });
+
+  it('should calculate a hash for minimum region', function() {
+
+    var region = new ibeacon.Region({
+      uuid: 'C53AD517-0815-410B-B124-68FFDFBFE0B3',
+    });
+
+    expect(region.hash()).toBe('453592305');
+
+  });
+
 });

@@ -30,6 +30,25 @@ Region.prototype.validate = function() {
 
 };
 
+Region.prototype.hash = function() {
+
+  var str = this.identifier + this.uuid + this.major + this.minor;
+
+  var hash = 0;
+  var i, chr, len;
+
+  if (str.length === 0) return hash + '';
+
+  for (i = 0, len = str.length; i < len; i++) {
+    chr = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+
+  return hash + '';
+
+};
+
 Region.prototype._normalize = function() {
   this.uuid = this.uuid.toLowerCase();
 };
