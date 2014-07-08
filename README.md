@@ -1,4 +1,4 @@
-cordova-ibeacon-plugin [![Build Status](https://travis-ci.org/mobilion/cordova-ibeacon-plugin.svg?branch=master)](https://travis-ci.org/mobilion/cordova-ibeacon-plugin)
+cordova-ibeacon-plugin [![Build Status](http://img.shields.io/travis/mobilion/cordova-ibeacon-plugin.svg?style=flat)](https://travis-ci.org/mobilion/cordova-ibeacon-plugin)
 ======================
 
 Cross-platform (iOS/Android) iBeacon plugin for [Cordova](http://cordova.apache.org/) and [Phonegap](http://phonegap.com/)
