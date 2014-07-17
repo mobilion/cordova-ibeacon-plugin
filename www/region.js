@@ -57,7 +57,6 @@ Region.prototype.equals = function(region) {
 
   return region instanceof Region &&
     this.uuid === region.uuid &&
-    this.identifier === region.identifier &&
     this.major === region.major &&
     this.minor === region.minor;
 
