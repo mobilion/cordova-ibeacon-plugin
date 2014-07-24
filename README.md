@@ -5,7 +5,8 @@ Cross-platform (iOS/Android) iBeacon plugin for [Cordova](http://cordova.apache.
 
 ## Features
 
-* Platforms: iOS, Android (based on [android-ibeacon-service](https://github.com/RadiusNetworks/android-ibeacon-service) of [Radius Networks](http://developer.radiusnetworks.com/ibeacon/android/))
+* Platforms: iOS, Android
+* Simple usage
 * Well tested on real devices (unit/integration tests)
 
 ## Install
@@ -49,3 +50,8 @@ Please refer to the corresponding [documentation page](https://github.com/mobili
 ## License
 
 [Apache License, Version 2.0](http://opensource.org/licenses/Apache-2.0)
+
+## Credits
+
+* **iOS Implementation** - [Repo](https://github.com/petermetz/cordova-plugin-ibeacon) - [Author]()
+* **Android Service** - [Repo](https://github.com/RadiusNetworks/android-ibeacon-service) (removed) - [Author](http://www.radiusnetworks.com/)
