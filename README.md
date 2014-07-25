@@ -53,5 +53,5 @@ Please refer to the corresponding [documentation page](https://github.com/mobili
 
 ## Credits
 
-* **iOS Implementation** - [Repo](https://github.com/petermetz/cordova-plugin-ibeacon) - [Author]()
+* **iOS Implementation** - [Repo](https://github.com/petermetz/cordova-plugin-ibeacon) - [Author](https://github.com/petermetz)
 * **Android Service** - [Repo](https://github.com/RadiusNetworks/android-ibeacon-service) (removed) - [Author](http://www.radiusnetworks.com/)
