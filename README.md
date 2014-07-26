@@ -28,7 +28,7 @@ var region = new ibeacon.Region({
 
 ibeacon.startRangingBeaconsInRegion({
   region: region,
-  didDetermineState: function(result) {
+  didRangeBeacons: function(result) {
     console.log('I see ' + result.beacons.length + ' beacons');
   }
 });
